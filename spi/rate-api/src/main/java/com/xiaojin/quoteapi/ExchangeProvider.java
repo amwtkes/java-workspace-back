@@ -1,5 +1,5 @@
 package com.xiaojin.quoteapi;
 
-public interface QuotesSPI {
+public interface ExchangeProvider {
     QuoteManager create();
 }
