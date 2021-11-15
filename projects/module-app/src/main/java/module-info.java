@@ -5,6 +5,7 @@ open module module.app {
     requires spring.context;
     requires spring.core;
     requires spring.beans;
+    requires module.lib;
 }
 
 
