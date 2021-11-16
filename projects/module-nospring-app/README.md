@@ -21,3 +21,6 @@
     - 这次运行就更清爽了，直接不依赖环境了，`./bin/java -m module.nospring.app`
     - 更加方便，直接打包成可执行文件(删除原来生成的jre-me文件夹)：`jlink -p $JAVA_HOME/jmods:./jmods:/Users/xiaojin/workspace/my_github/java-workspace/projects/module-nospring-lib/target/jmods --add-modules java.base,module.nospring.app,module.nospring.lib --launcher App=module.nospring.app --output jre-me`加入了luncher开关
     - `./bin/App`直接运行（加入`--compress 2 --strip-debug`可以压缩产生的可执行文件大小）
+
+
+[java modules](http://tutorials.jenkov.com/java/modules.html)
