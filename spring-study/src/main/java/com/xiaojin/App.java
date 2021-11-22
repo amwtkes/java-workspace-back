@@ -1,5 +1,6 @@
 package com.xiaojin;
 
+import com.factorybean.MyObjectConfiguration;
 import com.objects.Pet;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -43,5 +44,12 @@ public class App {
             System.out.println("two pets are not equal!");
         }
         System.out.println(myPet.getName() + " " + myPet.getAge() + " " + myPet.getNickName());
+
+        //FactoryBean Example
+        AnnotationConfigApplicationContext anoContext = new AnnotationConfigApplicationContext(MyObjectConfiguration.class);
+        //获取bean
+        System.out.println(anoContext.getBean("getMyObjectFactoryBean"));
+        //获取bean instance。https://juejin.cn/post/6960304586124967973
+        System.out.println(anoContext.getBean("&getMyObjectFactoryBean"));
     }
 }
