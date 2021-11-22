@@ -1,6 +1,8 @@
 package com.xiaojin;
 
+import com.objects.Pet;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class App {
@@ -11,7 +13,7 @@ public class App {
         ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml", "classpath:/cat-bean.xml");
         Cat myCat = (Cat) context.getBean("myCat");
         Cat myCat2 = (Cat) context.getBean("myCat");
-        if(myCat2.equals(myCat2)){
+        if (myCat2.equals(myCat2)) {
             System.out.println("ok");
         }
         System.out.println(myCat.getAge());
@@ -32,5 +34,8 @@ public class App {
 //        Person person2 = (Person) context2.getBean("myPerson");
 //        System.out.println(person2.getAge());
 //        System.out.println(person2.getName());
+        AnnotationConfigApplicationContext annotationConfigApplicationContext = new AnnotationConfigApplicationContext("com.objects");
+        Pet myPet = (Pet) annotationConfigApplicationContext.getBean("myPet");
+        System.out.println(myPet.getName() + " " + myPet.getAge() + " " + myPet.getNickName());
     }
 }
