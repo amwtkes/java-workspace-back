@@ -36,6 +36,12 @@ public class App {
 //        System.out.println(person2.getName());
         AnnotationConfigApplicationContext annotationConfigApplicationContext = new AnnotationConfigApplicationContext("com.objects");
         Pet myPet = (Pet) annotationConfigApplicationContext.getBean("myPet");
+        Pet myPet2 = (Pet) annotationConfigApplicationContext.getBean("myPet");
+        if (myPet == myPet2) {
+            System.out.println("two pets are equal!");
+        } else {
+            System.out.println("two pets are not equal!");
+        }
         System.out.println(myPet.getName() + " " + myPet.getAge() + " " + myPet.getNickName());
     }
 }
