@@ -10,6 +10,10 @@ public class App {
          */
         ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml", "classpath:/cat-bean.xml");
         Cat myCat = (Cat) context.getBean("myCat");
+        Cat myCat2 = (Cat) context.getBean("myCat");
+        if(myCat2.equals(myCat2)){
+            System.out.println("ok");
+        }
         System.out.println(myCat.getAge());
         System.out.println(myCat.getNickName());
 
