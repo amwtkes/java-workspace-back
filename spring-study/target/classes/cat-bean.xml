@@ -6,4 +6,5 @@
         <property name="nickName" value="hanhan"/>
         <property name="age" value="1"/>
     </bean>
+    <bean class="com.xiaojin.postprocessor.MyBeanFactoryPostProcessor"></bean>
 </beans>
