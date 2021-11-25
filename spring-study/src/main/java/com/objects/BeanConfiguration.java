@@ -11,6 +11,10 @@ public class BeanConfiguration {
 //    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
     @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
     public Pet myPet() {
-        return new Pet("hanhan", "xiaoKK", 3);
+        Pet pet =  new Pet();
+        pet.setAge(3);
+        pet.setName("xiaoKK");
+        pet.setNickName("hanhan");
+        return pet;
     }
 }

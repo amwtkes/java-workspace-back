@@ -51,5 +51,9 @@ public class App {
         System.out.println(anoContext.getBean("getMyObjectFactoryBean"));
         //获取bean instance。https://juejin.cn/post/6960304586124967973
         System.out.println(anoContext.getBean("&getMyObjectFactoryBean"));
+
+        //application context aware接口
+        System.out.println(myPet.getApplicationContext());
+        System.out.println(myPet.getEnvironment());
     }
 }
