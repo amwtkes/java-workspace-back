@@ -31,7 +31,7 @@ public class StringTest {
         String s2 = "1";
         System.out.println(s == s2);
 
-        String s3 = new String("1") + new String("1");
+        String s3 = new String("1") + new String("1"); //s3其实只想了常量池中的对象。StringObs只有 "1"
         s3.intern();
         String s4 = "11";
         System.out.println(s3 == s4);
