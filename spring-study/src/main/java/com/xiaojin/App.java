@@ -11,7 +11,7 @@ public class App {
         /*
           可以加上classpath:/
          */
-        ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml", "classpath:/cat-bean.xml");
+        ApplicationContext context = new ClassPathXmlApplicationContext("classpath:/cat-bean.xml");
         Cat myCat = (Cat) context.getBean("myCat");
         Cat myCat2 = (Cat) context.getBean("myCat");
         if (myCat2.equals(myCat2)) {
