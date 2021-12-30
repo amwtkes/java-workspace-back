@@ -34,8 +34,8 @@
         </dependency>
         <dependency>
             <groupId>com.xiaojin</groupId>
-            <artifactId>myLuncher</artifactId>
-            <version>1.0</version>
+            <artifactId>myluncher</artifactId>
+            <version>1.2</version>
         </dependency>
     </dependencies>
 
