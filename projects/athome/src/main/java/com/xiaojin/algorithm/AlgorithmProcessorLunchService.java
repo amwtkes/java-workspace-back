@@ -1,4 +1,4 @@
-package com.xiaojin.algorithm.maxsequencingsublistsum;
+package com.xiaojin.algorithm;
 
 import org.springframework.stereotype.Service;
 import runtime.processor.defaultprocessor.DefaultProcessorService;
