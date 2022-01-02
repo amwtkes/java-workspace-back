@@ -1,6 +1,6 @@
 package com.xiaojin.algorithm;
 
-import com.xiaojin.algorithm.base.AContext;
+import com.xiaojin.algorithm.base.AlgorithmContext;
 import com.xiaojin.algorithm.base.AlgorithmProcessor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +18,7 @@ public class AlgorithmRunner {
     private final DefaultProcessorService defaultProcessorService;
     private final List<AlgorithmProcessor> processorList;
 
-    public Integer run(AContext algorithmContext) {
+    public Integer run(AlgorithmContext algorithmContext) {
         DefaultProcessorResult<Integer> result = defaultProcessorService.runProcessors(processorList, algorithmContext);
         System.out.println("result is :>" + result.getResult());
         return result.getResult();
