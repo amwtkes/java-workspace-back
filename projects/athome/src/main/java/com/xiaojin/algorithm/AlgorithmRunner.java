@@ -1,7 +1,7 @@
 package com.xiaojin.algorithm;
 
-import com.xiaojin.algorithm.base.AlgorithmContext;
-import com.xiaojin.algorithm.base.AlgorithmProcessor;
+import com.xiaojin.algorithm.base.AlgorithmIntegerContext;
+import com.xiaojin.algorithm.base.AlgorithmIntProcessor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +15,11 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class AlgorithmRunner {
-    private final DefaultProcessorService defaultProcessorService;
-    private final List<AlgorithmProcessor> processorList;
+    private final AlgorithmProcessorLunchService lunchService;
+    private final List<AlgorithmIntProcessor> processorList;
 
-    public Integer run(AlgorithmContext algorithmContext) {
-        DefaultProcessorResult<Integer> result = defaultProcessorService.runProcessors(processorList, algorithmContext);
+    public Integer run(AlgorithmIntegerContext algorithmIntegerContext) {
+        DefaultProcessorResult<Integer> result = lunchService.run(processorList, algorithmIntegerContext);
         System.out.println("result is :>" + result.getResult());
         return result.getResult();
     }
