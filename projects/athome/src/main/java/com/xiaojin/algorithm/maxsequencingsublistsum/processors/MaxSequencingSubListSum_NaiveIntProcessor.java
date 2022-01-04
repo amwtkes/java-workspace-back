@@ -13,7 +13,7 @@ import static com.xiaojin.algorithm.maxsequencingsublistsum.processors.M1Process
 public class MaxSequencingSubListSum_NaiveIntProcessor implements AlgorithmGeneralProcessor {
     @Override
     public void process(AlgorithmGeneralContext algorithmGeneralContext) throws ProcessorException {
-        algorithmGeneralContext.assertInputNotBeNull(algorithmGeneralContext);
+        algorithmGeneralContext.assertInputNotBeNull();
 
         algorithmGeneralContext.finish(101);
     }

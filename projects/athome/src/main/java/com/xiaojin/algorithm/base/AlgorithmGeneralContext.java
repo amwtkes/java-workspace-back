@@ -20,8 +20,8 @@ public class AlgorithmGeneralContext extends DefaultProcessorContext<Object> {
         this.setFinished(true);
     }
 
-    public void assertInputNotBeNull(AlgorithmGeneralContext algorithmGeneralContext) throws ProcessorException {
-        if (algorithmGeneralContext.getInput().equals("")) {
+    public void assertInputNotBeNull() throws ProcessorException {
+        if (getInput().equals("")) {
             throw new ProcessorException("Input should not be null!");
         }
     }
