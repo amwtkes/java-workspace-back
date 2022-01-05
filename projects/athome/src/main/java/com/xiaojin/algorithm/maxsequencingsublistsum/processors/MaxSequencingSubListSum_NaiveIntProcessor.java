@@ -23,6 +23,11 @@ public class MaxSequencingSubListSum_NaiveIntProcessor implements AlgorithmGener
         algorithmGeneralContext.finish(result);
     }
 
+    @Override
+    public String getProcessorName() {
+        return "最大字段和蛮力算法";
+    }
+
     private MaxSequencingResult findMaxSequence(ArrayList<Float> source) {
         float max = Float.MIN_VALUE;
         int lIndex = 0, rIndex = 0;

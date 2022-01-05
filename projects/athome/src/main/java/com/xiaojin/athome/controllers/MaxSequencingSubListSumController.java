@@ -13,7 +13,9 @@ public class MaxSequencingSubListSumController {
     private final AlgorithmRunner algorithmRunner;
 
     @GetMapping("/MaxSunOfSequencing")
-    public Integer runAlgorithm() {
-        return algorithmRunner.run(new AlgorithmGeneralContext());
+    public String runAlgorithm() {
+        AlgorithmGeneralContext algorithmGeneralContext = new AlgorithmGeneralContext();
+        algorithmGeneralContext.setInput("1.5,-12.3,3.2,-5.5,23.2,3.2,-1.4,-12.2,34.2,5.4,-7.8,1.1,-4.9");
+        return algorithmRunner.run(algorithmGeneralContext);
     }
 }

@@ -17,9 +17,9 @@ public class AlgorithmRunner {
     private final AlgorithmProcessorLunchService lunchService;
     private final List<AlgorithmGeneralProcessor> processorList;
 
-    public Integer run(AlgorithmGeneralContext algorithmGeneralContext) {
+    public String run(AlgorithmGeneralContext algorithmGeneralContext) {
         DefaultProcessorResult<Object> result = lunchService.run(processorList, algorithmGeneralContext);
         System.out.println("result is :>" + result.getResult());
-        return Integer.valueOf(result.getResult().toString());
+        return result.getResult().toString();
     }
 }
