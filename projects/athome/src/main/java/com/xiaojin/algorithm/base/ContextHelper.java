@@ -43,4 +43,10 @@ public class ContextHelper {
         maxValue = maxValue.setScale(count, RoundingMode.HALF_UP);
         return maxValue;
     }
+
+    public static BigDecimal round2(Float value) {
+        BigDecimal maxValue = new BigDecimal(value);
+        maxValue = maxValue.setScale(2, RoundingMode.HALF_UP);
+        return maxValue;
+    }
 }

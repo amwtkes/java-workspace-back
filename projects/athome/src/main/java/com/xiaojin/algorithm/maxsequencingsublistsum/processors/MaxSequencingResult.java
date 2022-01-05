@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 @ToString
 public class MaxSequencingResult {
     private BigDecimal maxValue;
+    private Float originMaxValue;
     private int leftIndex;
     private int rightIndex;
 }

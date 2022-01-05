@@ -3,6 +3,7 @@ package com.xiaojin.algorithm.maxsequencingsublistsum.processors;
 import com.xiaojin.algorithm.base.AlgorithmGeneralContext;
 import com.xiaojin.algorithm.base.AlgorithmGeneralProcessor;
 import com.xiaojin.algorithm.base.ContextHelper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import runtime.processor.annotation.SortOrder;
 import runtime.processor.baseprocessor.ProcessorException;
@@ -10,17 +11,18 @@ import runtime.processor.baseprocessor.ProcessorException;
 import java.util.ArrayList;
 
 import static com.xiaojin.algorithm.base.ContextHelper.round;
-import static com.xiaojin.algorithm.maxsequencingsublistsum.processors.M1ProcessorPriority.ALL;
+import static com.xiaojin.algorithm.maxsequencingsublistsum.processors.M1ProcessorPriority.NAIVE;
 
 @Component
-@SortOrder(ALL)
+@SortOrder(NAIVE)
+@Slf4j
 public class MaxSequencingSubListSum_NaiveIntProcessor implements AlgorithmGeneralProcessor {
     @Override
     public void process(AlgorithmGeneralContext algorithmGeneralContext) throws ProcessorException {
         algorithmGeneralContext.assertInputNotBeNull();
         ArrayList<Float> sourceList = ContextHelper.splitter(algorithmGeneralContext, 0f);
         MaxSequencingResult result = findMaxSequence(sourceList);
-        algorithmGeneralContext.finish(result);
+        log.info(getProcessorName() + " - 计算结果------>" + result.toString());
     }
 
     @Override
