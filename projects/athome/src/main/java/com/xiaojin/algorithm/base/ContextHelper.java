@@ -3,6 +3,7 @@ package com.xiaojin.algorithm.base;
 import runtime.processor.baseprocessor.ProcessorException;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 
 public class ContextHelper {
@@ -35,5 +36,11 @@ public class ContextHelper {
             }
         }
         return ret;
+    }
+
+    public static BigDecimal round(int count, Float value) {
+        BigDecimal maxValue = new BigDecimal(value);
+        maxValue = maxValue.setScale(count, RoundingMode.HALF_UP);
+        return maxValue;
     }
 }

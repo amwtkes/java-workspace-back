@@ -7,10 +7,9 @@ import org.springframework.stereotype.Component;
 import runtime.processor.annotation.SortOrder;
 import runtime.processor.baseprocessor.ProcessorException;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 
+import static com.xiaojin.algorithm.base.ContextHelper.round;
 import static com.xiaojin.algorithm.maxsequencingsublistsum.processors.M1ProcessorPriority.ALL;
 
 @Component
@@ -41,10 +40,9 @@ public class MaxSequencingSubListSum_NaiveIntProcessor implements AlgorithmGener
                 }
             }
         }
-        BigDecimal maxValue = new BigDecimal(max);
-        maxValue = maxValue.setScale(2, RoundingMode.HALF_UP);
+
         return MaxSequencingResult.builder()
-                .maxValue(maxValue)
+                .maxValue(round(2, max))
                 .leftIndex(lIndex)
                 .rightIndex(rIndex)
                 .build();
