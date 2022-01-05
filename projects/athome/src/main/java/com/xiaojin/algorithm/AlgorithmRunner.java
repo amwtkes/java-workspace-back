@@ -2,6 +2,7 @@ package com.xiaojin.algorithm;
 
 import com.xiaojin.algorithm.base.AlgorithmGeneralContext;
 import com.xiaojin.algorithm.base.AlgorithmGeneralProcessor;
+import com.xiaojin.algorithm.maxsequencingsublistsum.processors.MaxSequencingProcessor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +16,10 @@ import java.util.List;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class AlgorithmRunner {
     private final AlgorithmProcessorLunchService lunchService;
-    private final List<AlgorithmGeneralProcessor> processorList;
+    private final List<MaxSequencingProcessor> processorList;
 
     public String run(AlgorithmGeneralContext algorithmGeneralContext) {
-        DefaultProcessorResult<Object> result = lunchService.run(processorList, algorithmGeneralContext);
+        DefaultProcessorResult<Object> result = lunchService.runMaxSequencingSubAlgorithm(processorList, algorithmGeneralContext);
         System.out.println("result is :>" + result.getResult());
         return result.getResult().toString();
     }

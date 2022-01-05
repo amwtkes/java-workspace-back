@@ -16,7 +16,7 @@ import static com.xiaojin.algorithm.maxsequencingsublistsum.processors.M1Process
 @Component
 @SortOrder(DC)
 @Slf4j
-public class MaxSequencingSubListSum_DCProcessor implements AlgorithmGeneralProcessor {
+public class MaxSequencingSubListSum_DCProcessor implements MaxSequencingProcessor {
     @Override
     public void process(AlgorithmGeneralContext algorithmGeneralContext) throws ProcessorException {
         algorithmGeneralContext.assertInputNotBeNull();
