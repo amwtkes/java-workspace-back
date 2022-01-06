@@ -31,7 +31,7 @@ public class MaxSequencingSubList_DPProcessor implements MaxSequencingProcessor 
 
     private MaxSequencingResult doJob(ArrayList<Float> arrayList) throws ProcessorException {
         ArrayList<MaxSequencingResult> table = new ArrayList<>(arrayList.size());
-        findMax(arrayList, table, arrayList.size() - 1);
+        findMaxNoRecursive(arrayList, table);
         Optional<MaxSequencingResult> max = table.stream().max(Comparator.comparing(MaxSequencingResult::getOriginMaxValue));
         if (max.isPresent()) {
             MaxSequencingResult result = max.get();
@@ -60,6 +60,26 @@ public class MaxSequencingSubList_DPProcessor implements MaxSequencingProcessor 
                 .build() : MaxSequencingResult.builder().originMaxValue(arrayList.get(index)).leftIndex(index).rightIndex(index).build();
         table.add(result);
         return result;
+    }
+
+    private void findMaxNoRecursive(ArrayList<Float> arrayList, ArrayList<MaxSequencingResult> table) {
+        for (int i = 0; i < arrayList.size(); i++) {
+            if (i == 0) {
+                MaxSequencingResult result = MaxSequencingResult.builder().originMaxValue(arrayList.get(i)).rightIndex(i).leftIndex(i).build();
+                table.add(result);
+                continue;
+            }
+            MaxSequencingResult preResult = table.get(i - 1);
+            Float preMaxValue = preResult.getOriginMaxValue();
+            Float tmpResult = preMaxValue + arrayList.get(i);
+            MaxSequencingResult result = tmpResult >= arrayList.get(i) ? MaxSequencingResult.builder()
+                    .originMaxValue(tmpResult)
+                    .leftIndex(preResult.getLeftIndex())
+                    .rightIndex(i)
+                    .build() : MaxSequencingResult.builder().originMaxValue(arrayList.get(i)).leftIndex(i).rightIndex(i).build();
+            table.add(result);
+        }
+
     }
 
     @Override
