@@ -1,4 +1,4 @@
-package com.xiaojin.algorithm.maxsequencingsublistsum.processors;
+package com.xiaojin.algorithm.maxsequencingsublistsum.processors.base;
 
 import com.xiaojin.algorithm.base.AlgorithmGeneralProcessor;
 

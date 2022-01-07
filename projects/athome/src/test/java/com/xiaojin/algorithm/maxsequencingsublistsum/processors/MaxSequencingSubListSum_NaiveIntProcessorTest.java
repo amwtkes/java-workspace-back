@@ -1,6 +1,7 @@
 package com.xiaojin.algorithm.maxsequencingsublistsum.processors;
 
 import com.xiaojin.algorithm.base.AlgorithmGeneralContext;
+import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.MaxSequencingResult;
 import org.junit.jupiter.api.Test;
 import runtime.processor.baseprocessor.ProcessorException;
 

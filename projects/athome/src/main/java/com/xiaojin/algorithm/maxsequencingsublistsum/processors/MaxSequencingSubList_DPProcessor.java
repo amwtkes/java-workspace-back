@@ -2,6 +2,8 @@ package com.xiaojin.algorithm.maxsequencingsublistsum.processors;
 
 import com.xiaojin.algorithm.base.AlgorithmGeneralContext;
 import com.xiaojin.algorithm.base.ContextHelper;
+import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.MaxSequencingProcessor;
+import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.MaxSequencingResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import runtime.processor.annotation.SortOrder;
@@ -12,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Optional;
 
-import static com.xiaojin.algorithm.maxsequencingsublistsum.processors.M1ProcessorPriority.DP;
+import static com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.M1ProcessorPriority.DP;
 
 @Component
 @Slf4j

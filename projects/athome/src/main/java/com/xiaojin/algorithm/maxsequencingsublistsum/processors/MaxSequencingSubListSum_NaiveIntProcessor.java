@@ -1,19 +1,19 @@
 package com.xiaojin.algorithm.maxsequencingsublistsum.processors;
 
 import com.xiaojin.algorithm.base.AlgorithmGeneralContext;
-import com.xiaojin.algorithm.base.AlgorithmGeneralProcessor;
 import com.xiaojin.algorithm.base.ContextHelper;
+import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.MaxSequencingProcessor;
+import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.MaxSequencingResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import runtime.processor.annotation.SortOrder;
-import runtime.processor.baseprocessor.CommonProcessorConst;
 import runtime.processor.baseprocessor.ProcessorException;
 import runtime.processor.defaultprocessor.DefaultProcessorResult;
 
 import java.util.ArrayList;
 
 import static com.xiaojin.algorithm.base.ContextHelper.round;
-import static com.xiaojin.algorithm.maxsequencingsublistsum.processors.M1ProcessorPriority.NAIVE;
+import static com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.M1ProcessorPriority.NAIVE;
 
 @Component
 @SortOrder(NAIVE)

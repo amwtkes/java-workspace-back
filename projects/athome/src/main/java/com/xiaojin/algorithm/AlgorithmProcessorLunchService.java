@@ -2,7 +2,7 @@ package com.xiaojin.algorithm;
 
 import com.xiaojin.algorithm.base.AlgorithmGeneralContext;
 import com.xiaojin.algorithm.base.AlgorithmGeneralProcessor;
-import com.xiaojin.algorithm.maxsequencingsublistsum.processors.MaxSequencingProcessor;
+import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.MaxSequencingProcessor;
 import org.springframework.stereotype.Service;
 import runtime.processor.defaultprocessor.DefaultProcessorResult;
 import runtime.processor.defaultprocessor.DefaultProcessorService;

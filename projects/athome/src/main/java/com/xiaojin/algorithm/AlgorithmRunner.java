@@ -1,8 +1,7 @@
 package com.xiaojin.algorithm;
 
 import com.xiaojin.algorithm.base.AlgorithmGeneralContext;
-import com.xiaojin.algorithm.base.AlgorithmGeneralProcessor;
-import com.xiaojin.algorithm.maxsequencingsublistsum.processors.MaxSequencingProcessor;
+import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.MaxSequencingProcessor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
