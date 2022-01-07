@@ -31,4 +31,23 @@ class MaxSequencingSubListSum_DCProcessorTest {
         }
 
     }
+
+    @Test
+    void normalIntTest() {
+        MaxSequencingContext algorithmGeneralContext = new MaxSequencingContext();
+        algorithmGeneralContext.setSourceDataType(SourceDataType.INT);
+        algorithmGeneralContext.setInput("1,-12,3,-5,23,3,-1,-12,34,5,-7,1,-5");
+        MaxSequencingSubListSum_DC_I_Processor p = new MaxSequencingSubListSum_DC_I_Processor();
+        try {
+            p.process(algorithmGeneralContext);
+            MaxSequencingResult result = (MaxSequencingResult) algorithmGeneralContext.getProcessorResult().getResult();
+            assertNotNull(result);
+            assertEquals(result.getMaxValueInt(), 52);
+            assertEquals(result.getLeftIndex(), 4);
+            assertEquals(result.getRightIndex(), 9);
+        } catch (ProcessorException e) {
+            e.printStackTrace();
+        }
+
+    }
 }

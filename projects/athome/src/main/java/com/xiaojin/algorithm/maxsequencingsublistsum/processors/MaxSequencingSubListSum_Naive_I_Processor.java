@@ -13,23 +13,22 @@ import runtime.processor.defaultprocessor.DefaultProcessorResult;
 
 import java.util.ArrayList;
 
-import static com.xiaojin.algorithm.base.ContextHelper.round;
-import static com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.M1ProcessorPriority.NAIVE_F;
+import static com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.M1ProcessorPriority.NAIVE_I;
 
 @Component
-@SortOrder(NAIVE_F)
+@SortOrder(NAIVE_I)
 @Slf4j
-public class MaxSequencingSubListSum_NaiveIntProcessor implements MaxSequencingProcessor {
+public class MaxSequencingSubListSum_Naive_I_Processor implements MaxSequencingProcessor {
     @Override
     public void process(MaxSequencingContext algorithmGeneralContext) throws ProcessorException {
-        if (algorithmGeneralContext.getSourceDataType().equals(SourceDataType.INT)) {
+        if (algorithmGeneralContext.getSourceDataType().equals(SourceDataType.FLOAT)) {
             return;
         }
 
         algorithmGeneralContext.assertInputNotBeNull();
-        ArrayList<Float> sourceList = algorithmGeneralContext.getFloatList();
+        ArrayList<Integer> sourceList = algorithmGeneralContext.getIntList();
         if (sourceList == null || sourceList.size() == 0) {
-            sourceList = ContextHelper.splitter(algorithmGeneralContext, 0f);
+            sourceList = ContextHelper.splitter(algorithmGeneralContext, (Integer) SourceDataType.INT.getValue());
         }
         MaxSequencingResult result = findMaxSequence(sourceList);
         log.info(getProcessorName() + " - 计算结果------>" + result.toString());
@@ -43,12 +42,12 @@ public class MaxSequencingSubListSum_NaiveIntProcessor implements MaxSequencingP
         return "最大字段和蛮力算法";
     }
 
-    private MaxSequencingResult findMaxSequence(ArrayList<Float> source) {
-        float max = Float.MIN_VALUE;
+    private MaxSequencingResult findMaxSequence(ArrayList<Integer> source) {
+        Integer max = Integer.MIN_VALUE;
         int lIndex = 0, rIndex = 0;
         int l = source.size();
         for (int i = 0; i < l; i++) {
-            float tmpSum = 0.0f;
+            Integer tmpSum = 0;
             for (int j = i; j < l; j++) {
                 tmpSum += source.get(j);
                 if (max < tmpSum) {
@@ -61,8 +60,7 @@ public class MaxSequencingSubListSum_NaiveIntProcessor implements MaxSequencingP
         }
 
         return MaxSequencingResult.builder()
-                .maxValueDecimal(round(2, max))
-                .originMaxValue(max)
+                .maxValueInt(max)
                 .leftIndex(lIndex)
                 .rightIndex(rIndex)
                 .build();
