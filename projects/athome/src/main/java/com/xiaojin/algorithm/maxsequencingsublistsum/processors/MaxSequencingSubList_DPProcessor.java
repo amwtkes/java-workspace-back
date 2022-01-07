@@ -1,9 +1,10 @@
 package com.xiaojin.algorithm.maxsequencingsublistsum.processors;
 
-import com.xiaojin.algorithm.base.AlgorithmGeneralContext;
 import com.xiaojin.algorithm.base.ContextHelper;
+import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.MaxSequencingContext;
 import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.MaxSequencingProcessor;
 import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.MaxSequencingResult;
+import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.SourceDataType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import runtime.processor.annotation.SortOrder;
@@ -14,16 +15,23 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Optional;
 
-import static com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.M1ProcessorPriority.DP;
+import static com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.M1ProcessorPriority.DP_F;
 
 @Component
 @Slf4j
-@SortOrder(DP)
+@SortOrder(DP_F)
 public class MaxSequencingSubList_DPProcessor implements MaxSequencingProcessor {
     @Override
-    public void process(AlgorithmGeneralContext algorithmGeneralContext) throws ProcessorException {
+    public void process(MaxSequencingContext algorithmGeneralContext) throws ProcessorException {
+        if (algorithmGeneralContext.getSourceDataType().equals(SourceDataType.INT)) {
+            return;
+        }
+
         algorithmGeneralContext.assertInputNotBeNull();
-        ArrayList<Float> list = ContextHelper.splitter(algorithmGeneralContext, 1.0f);
+        ArrayList<Float> list = algorithmGeneralContext.getFloatList();
+        if (algorithmGeneralContext.getFloatList() == null || algorithmGeneralContext.getFloatList().size() == 0) {
+            list = ContextHelper.splitter(algorithmGeneralContext, 1.0f);
+        }
         MaxSequencingResult maxSequencingResult = doJob(list);
         log.info(getProcessorName() + " - 计算结果------>" + maxSequencingResult);
         DefaultProcessorResult<Object> processorResult = new DefaultProcessorResult<>();
@@ -37,7 +45,7 @@ public class MaxSequencingSubList_DPProcessor implements MaxSequencingProcessor 
         Optional<MaxSequencingResult> max = table.stream().max(Comparator.comparing(MaxSequencingResult::getOriginMaxValue));
         if (max.isPresent()) {
             MaxSequencingResult result = max.get();
-            result.setMaxValue(ContextHelper.round2(result.getOriginMaxValue()));
+            result.setMaxValueDecimal(ContextHelper.round2(result.getOriginMaxValue()));
             return result;
         }
         throw new ProcessorException("DP返回空！");

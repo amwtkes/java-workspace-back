@@ -10,8 +10,10 @@ import java.math.BigDecimal;
 @Builder
 @ToString
 public class MaxSequencingResult {
-    private BigDecimal maxValue;
+    private BigDecimal maxValueDecimal;
     private Float originMaxValue;
+
+    private int maxValueInt;
     private int leftIndex;
     private int rightIndex;
 }

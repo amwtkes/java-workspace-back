@@ -1,7 +1,7 @@
 package com.xiaojin.athome.controllers;
 
 import com.xiaojin.algorithm.AlgorithmRunner;
-import com.xiaojin.algorithm.base.AlgorithmGeneralContext;
+import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.MaxSequencingContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +14,7 @@ public class MaxSequencingSubListSumController {
 
     @GetMapping("/MaxSunOfSequencing")
     public String runAlgorithm() {
-        AlgorithmGeneralContext algorithmGeneralContext = new AlgorithmGeneralContext();
-        return algorithmRunner.run(algorithmGeneralContext);
+        MaxSequencingContext algorithmGeneralContext = new MaxSequencingContext();
+        return algorithmRunner.runMaxSequencingAlgorithm(algorithmGeneralContext);
     }
 }

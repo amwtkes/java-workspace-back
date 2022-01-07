@@ -1,9 +1,10 @@
 package com.xiaojin.algorithm.maxsequencingsublistsum.processors;
 
-import com.xiaojin.algorithm.base.AlgorithmGeneralContext;
 import com.xiaojin.algorithm.base.ContextHelper;
+import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.MaxSequencingContext;
 import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.MaxSequencingProcessor;
 import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.MaxSequencingResult;
+import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.SourceDataType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import runtime.processor.annotation.SortOrder;
@@ -13,16 +14,23 @@ import runtime.processor.defaultprocessor.DefaultProcessorResult;
 import java.util.ArrayList;
 
 import static com.xiaojin.algorithm.base.ContextHelper.round;
-import static com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.M1ProcessorPriority.NAIVE;
+import static com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.M1ProcessorPriority.NAIVE_F;
 
 @Component
-@SortOrder(NAIVE)
+@SortOrder(NAIVE_F)
 @Slf4j
 public class MaxSequencingSubListSum_NaiveIntProcessor implements MaxSequencingProcessor {
     @Override
-    public void process(AlgorithmGeneralContext algorithmGeneralContext) throws ProcessorException {
+    public void process(MaxSequencingContext algorithmGeneralContext) throws ProcessorException {
+        if (algorithmGeneralContext.getSourceDataType().equals(SourceDataType.INT)) {
+            return;
+        }
+
         algorithmGeneralContext.assertInputNotBeNull();
-        ArrayList<Float> sourceList = ContextHelper.splitter(algorithmGeneralContext, 0f);
+        ArrayList<Float> sourceList = algorithmGeneralContext.getFloatList();
+        if (sourceList == null || sourceList.size() == 0) {
+            sourceList = ContextHelper.splitter(algorithmGeneralContext, 0f);
+        }
         MaxSequencingResult result = findMaxSequence(sourceList);
         log.info(getProcessorName() + " - 计算结果------>" + result.toString());
         DefaultProcessorResult<Object> processorResult = new DefaultProcessorResult<>();
@@ -53,7 +61,7 @@ public class MaxSequencingSubListSum_NaiveIntProcessor implements MaxSequencingP
         }
 
         return MaxSequencingResult.builder()
-                .maxValue(round(2, max))
+                .maxValueDecimal(round(2, max))
                 .originMaxValue(max)
                 .leftIndex(lIndex)
                 .rightIndex(rIndex)

@@ -1,6 +1,6 @@
 package com.xiaojin.algorithm;
 
-import com.xiaojin.algorithm.base.AlgorithmGeneralContext;
+import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.MaxSequencingContext;
 import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.MaxSequencingProcessor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +17,7 @@ public class AlgorithmRunner {
     private final AlgorithmProcessorLunchService lunchService;
     private final List<MaxSequencingProcessor> processorList;
 
-    public String run(AlgorithmGeneralContext algorithmGeneralContext) {
+    public String runMaxSequencingAlgorithm(MaxSequencingContext algorithmGeneralContext) {
         DefaultProcessorResult<Object> result = lunchService.runMaxSequencingSubAlgorithm(processorList, algorithmGeneralContext);
         System.out.println("result is :>" + result.getResult());
         return result.getResult().toString();

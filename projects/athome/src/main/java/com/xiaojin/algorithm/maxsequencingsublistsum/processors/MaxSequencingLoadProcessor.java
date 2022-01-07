@@ -1,6 +1,7 @@
 package com.xiaojin.algorithm.maxsequencingsublistsum.processors;
 
 import com.xiaojin.algorithm.base.AlgorithmGeneralContext;
+import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.MaxSequencingContext;
 import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.MaxSequencingProcessor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class MaxSequencingLoadProcessor implements MaxSequencingProcessor {
     private final ResourceLoader resourceLoader;
 
     @Override
-    public void process(AlgorithmGeneralContext algorithmGeneralContext) throws ProcessorException {
+    public void process(MaxSequencingContext algorithmGeneralContext) throws ProcessorException {
         Resource resource = resourceLoader.getResource("classpath:MaxSequencingSublist/Data.txt");
         try {
             File file = resource.getFile();

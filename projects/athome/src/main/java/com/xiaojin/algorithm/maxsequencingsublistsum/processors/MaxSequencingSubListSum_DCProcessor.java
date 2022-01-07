@@ -1,9 +1,10 @@
 package com.xiaojin.algorithm.maxsequencingsublistsum.processors;
 
-import com.xiaojin.algorithm.base.AlgorithmGeneralContext;
 import com.xiaojin.algorithm.base.ContextHelper;
+import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.MaxSequencingContext;
 import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.MaxSequencingProcessor;
 import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.MaxSequencingResult;
+import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.SourceDataType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import runtime.processor.annotation.SortOrder;
@@ -12,18 +13,25 @@ import runtime.processor.defaultprocessor.DefaultProcessorResult;
 
 import java.util.ArrayList;
 
-import static com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.M1ProcessorPriority.DC;
+import static com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.M1ProcessorPriority.DC_F;
 
 @Component
-@SortOrder(DC)
+@SortOrder(DC_F)
 @Slf4j
 public class MaxSequencingSubListSum_DCProcessor implements MaxSequencingProcessor {
     @Override
-    public void process(AlgorithmGeneralContext algorithmGeneralContext) throws ProcessorException {
+    public void process(MaxSequencingContext algorithmGeneralContext) throws ProcessorException {
+        if (algorithmGeneralContext.getSourceDataType().equals(SourceDataType.INT)) {
+            return;
+        }
+
         algorithmGeneralContext.assertInputNotBeNull();
-        ArrayList<Float> inputs = ContextHelper.splitter(algorithmGeneralContext, 1f);
+        ArrayList<Float> inputs = algorithmGeneralContext.getFloatList();
+        if (inputs == null || inputs.size() == 0) {
+            inputs = ContextHelper.splitter(algorithmGeneralContext, 1f);
+        }
         MaxSequencingResult maxSequencingResult = doJob(inputs);
-        maxSequencingResult.setMaxValue(ContextHelper.round2(maxSequencingResult.getOriginMaxValue()));
+        maxSequencingResult.setMaxValueDecimal(ContextHelper.round2(maxSequencingResult.getOriginMaxValue()));
         log.info(getProcessorName() + " - 计算结果------>" + maxSequencingResult);
         DefaultProcessorResult<Object> processorResult = new DefaultProcessorResult<>();
         processorResult.setResult(maxSequencingResult);

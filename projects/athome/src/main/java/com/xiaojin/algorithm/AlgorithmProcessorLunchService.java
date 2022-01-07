@@ -2,6 +2,7 @@ package com.xiaojin.algorithm;
 
 import com.xiaojin.algorithm.base.AlgorithmGeneralContext;
 import com.xiaojin.algorithm.base.AlgorithmGeneralProcessor;
+import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.MaxSequencingContext;
 import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.MaxSequencingProcessor;
 import org.springframework.stereotype.Service;
 import runtime.processor.defaultprocessor.DefaultProcessorResult;
@@ -22,7 +23,7 @@ public class AlgorithmProcessorLunchService extends DefaultProcessorService {
         return this.runProcessors(processorList, context);
     }
 
-    public DefaultProcessorResult<Object> runMaxSequencingSubAlgorithm(List<MaxSequencingProcessor> processorList, AlgorithmGeneralContext context) {
+    public DefaultProcessorResult<Object> runMaxSequencingSubAlgorithm(List<MaxSequencingProcessor> processorList, MaxSequencingContext context) {
         return this.runProcessors(processorList, context);
     }
 }
