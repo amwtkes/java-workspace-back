@@ -32,17 +32,16 @@ public class MaxSequencingSubList_DP_I_Processor implements MaxSequencingProcess
         if (algorithmGeneralContext.getIntList() == null || algorithmGeneralContext.getIntList().size() == 0) {
             list = ContextHelper.splitter(algorithmGeneralContext, (Integer) SourceDataType.INT.getValue());
         }
-        MaxSequencingResult maxSequencingResult = doJob(list);
+        MaxSequencingResult maxSequencingResult = doJob(list, algorithmGeneralContext);
         log.info(getProcessorName() + " - 计算结果------>" + maxSequencingResult);
         DefaultProcessorResult<Object> processorResult = new DefaultProcessorResult<>();
         processorResult.setResult(maxSequencingResult);
         algorithmGeneralContext.setProcessorResult(processorResult);
     }
 
-    private MaxSequencingResult doJob(ArrayList<Integer> arrayList) throws ProcessorException {
-        ArrayList<MaxSequencingResult> table = new ArrayList<>(arrayList.size());
-        findMaxNoRecursive(arrayList, table);
-        Optional<MaxSequencingResult> max = table.stream().max(Comparator.comparing(MaxSequencingResult::getMaxValueInt));
+    private MaxSequencingResult doJob(ArrayList<Integer> arrayList, MaxSequencingContext maxSequencingContext) throws ProcessorException {
+        findMaxNoRecursive(arrayList, maxSequencingContext.getDpTable());
+        Optional<MaxSequencingResult> max = maxSequencingContext.getDpTable().stream().max(Comparator.comparing(MaxSequencingResult::getMaxValueInt));
         if (max.isPresent()) {
             return max.get();
         }
@@ -52,19 +51,24 @@ public class MaxSequencingSubList_DP_I_Processor implements MaxSequencingProcess
     private void findMaxNoRecursive(ArrayList<Integer> arrayList, ArrayList<MaxSequencingResult> table) {
         for (int i = 0; i < arrayList.size(); i++) {
             if (i == 0) {
-                MaxSequencingResult result = MaxSequencingResult.builder().maxValueInt(arrayList.get(i)).rightIndex(i).leftIndex(i).build();
-                table.add(result);
+                MaxSequencingResult result = table.get(i);
+                result.setMaxValueInt(arrayList.get(i));
+                result.setLeftIndex(i);
+                result.setRightIndex(i);
                 continue;
             }
             MaxSequencingResult preResult = table.get(i - 1);
             Integer preMaxValue = preResult.getMaxValueInt();
             int tmpResult = preMaxValue + arrayList.get(i);
-            MaxSequencingResult result = tmpResult >= arrayList.get(i) ? MaxSequencingResult.builder()
-                    .maxValueInt(tmpResult)
-                    .leftIndex(preResult.getLeftIndex())
-                    .rightIndex(i)
-                    .build() : MaxSequencingResult.builder().maxValueInt(arrayList.get(i)).leftIndex(i).rightIndex(i).build();
-            table.add(result);
+            MaxSequencingResult result = table.get(i);
+            if (tmpResult >= arrayList.get(i)) {
+                result.setMaxValueInt(tmpResult);
+                result.setLeftIndex(preResult.getLeftIndex());
+            } else {
+                result.setMaxValueInt(arrayList.get(i));
+                result.setLeftIndex(i);
+            }
+            result.setRightIndex(i);
         }
 
     }

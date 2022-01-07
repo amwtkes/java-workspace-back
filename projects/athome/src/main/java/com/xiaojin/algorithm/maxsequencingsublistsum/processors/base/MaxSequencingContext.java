@@ -17,4 +17,11 @@ public class MaxSequencingContext extends AlgorithmGeneralContext {
     private ArrayList<MaxSequencingResult> dpTable;
     private ArrayList<Float> floatList;
     private ArrayList<Integer> intList;
+
+    public int getListSize() {
+        if (sourceDataType.equals(SourceDataType.FLOAT)) {
+            return floatList.size();
+        }
+        return intList.size();
+    }
 }

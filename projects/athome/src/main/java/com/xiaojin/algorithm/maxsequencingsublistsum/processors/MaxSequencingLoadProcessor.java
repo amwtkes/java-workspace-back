@@ -23,7 +23,7 @@ public class MaxSequencingLoadProcessor implements MaxSequencingProcessor {
 
     @Override
     public void process(MaxSequencingContext algorithmGeneralContext) throws ProcessorException {
-        Resource resource = resourceLoader.getResource("classpath:MaxSequencingSublist/Data.txt");
+        Resource resource = resourceLoader.getResource("classpath:MaxSequencingSublist/Data_Int.txt");
         try {
             File file = resource.getFile();
             BufferedReader reader = new BufferedReader(new FileReader(file));

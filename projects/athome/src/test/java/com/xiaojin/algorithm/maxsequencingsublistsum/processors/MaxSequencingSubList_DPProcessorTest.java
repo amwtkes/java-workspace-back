@@ -32,10 +32,12 @@ class MaxSequencingSubList_DPProcessorTest {
     }
 
     @Test
-    void testDpInt() {
+    void testDpInt() throws ProcessorException {
+        MaxSequencingSetUpProcessor maxSequencingSetUpProcessor = new MaxSequencingSetUpProcessor();
         MaxSequencingContext algorithmGeneralContext = new MaxSequencingContext();
         algorithmGeneralContext.setSourceDataType(SourceDataType.INT);
         algorithmGeneralContext.setInput("1,-12,3,-5,23,3,-1,-12,34,5,-7,1,-5");
+        maxSequencingSetUpProcessor.process(algorithmGeneralContext);
         MaxSequencingSubList_DP_I_Processor p = new MaxSequencingSubList_DP_I_Processor();
         try {
             p.process(algorithmGeneralContext);

@@ -4,10 +4,13 @@ import com.xiaojin.algorithm.base.AlgorithmGeneralContext;
 import com.xiaojin.algorithm.base.ContextHelper;
 import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.MaxSequencingContext;
 import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.MaxSequencingProcessor;
+import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.MaxSequencingResult;
 import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.SourceDataType;
 import org.springframework.stereotype.Component;
 import runtime.processor.annotation.SortOrder;
 import runtime.processor.baseprocessor.ProcessorException;
+
+import java.util.ArrayList;
 
 import static com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.M1ProcessorPriority.SETUP;
 
@@ -19,6 +22,15 @@ public class MaxSequencingSetUpProcessor implements MaxSequencingProcessor {
         SourceDataType sourceDataType = getSourceType(maxSequencingContext);
         maxSequencingContext.setSourceDataType(sourceDataType);
         setUpInputArrayList(maxSequencingContext);
+        prepareDPObjectCaching(maxSequencingContext);
+    }
+
+    private void prepareDPObjectCaching(MaxSequencingContext maxSequencingContext) {
+        ArrayList<MaxSequencingResult> dpTable = new ArrayList<>(maxSequencingContext.getListSize());
+        for (int i = 0; i < maxSequencingContext.getListSize(); i++) {
+            dpTable.add(MaxSequencingResult.builder().build());
+        }
+        maxSequencingContext.setDpTable(dpTable);
     }
 
     private void setUpInputArrayList(MaxSequencingContext maxSequencingContext) throws ProcessorException {
