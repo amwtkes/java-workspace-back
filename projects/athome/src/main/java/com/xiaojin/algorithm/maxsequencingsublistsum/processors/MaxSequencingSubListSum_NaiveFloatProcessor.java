@@ -8,6 +8,7 @@ import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.SourceDataT
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import runtime.processor.annotation.SortOrder;
+import runtime.processor.baseprocessor.CommonProcessorConst;
 import runtime.processor.baseprocessor.ProcessorException;
 import runtime.processor.defaultprocessor.DefaultProcessorResult;
 
@@ -17,7 +18,7 @@ import static com.xiaojin.algorithm.base.ContextHelper.round;
 import static com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.M1ProcessorPriority.NAIVE_F;
 
 @Component
-@SortOrder(NAIVE_F)
+@SortOrder(CommonProcessorConst.PROCESSOR_IGNORED)
 @Slf4j
 public class MaxSequencingSubListSum_NaiveFloatProcessor implements MaxSequencingProcessor {
     @Override
