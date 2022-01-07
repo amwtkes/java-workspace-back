@@ -1,7 +1,6 @@
 package com.xiaojin.algorithm.maxsequencingsublistsum.processors;
 
 import com.xiaojin.algorithm.base.AlgorithmGeneralContext;
-import com.xiaojin.algorithm.base.AlgorithmGeneralProcessor;
 import com.xiaojin.algorithm.base.ContextHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -22,7 +21,8 @@ public class MaxSequencingSubListSum_DCProcessor implements MaxSequencingProcess
         algorithmGeneralContext.assertInputNotBeNull();
         ArrayList<Float> inputs = ContextHelper.splitter(algorithmGeneralContext, 1f);
         MaxSequencingResult maxSequencingResult = doJob(inputs);
-        log.info(getProcessorName() + " - 计算结果------>" + maxSequencingResult.toString());
+        maxSequencingResult.setMaxValue(ContextHelper.round2(maxSequencingResult.getOriginMaxValue()));
+        log.info(getProcessorName() + " - 计算结果------>" + maxSequencingResult);
         DefaultProcessorResult<Object> processorResult = new DefaultProcessorResult<>();
         processorResult.setResult(maxSequencingResult);
         algorithmGeneralContext.setProcessorResult(processorResult);
@@ -34,7 +34,7 @@ public class MaxSequencingSubListSum_DCProcessor implements MaxSequencingProcess
 
     private MaxSequencingResult findMaxSequencing(ArrayList<Float> arrayList, int beginIndex, int endIndex) {
         if (beginIndex == endIndex) {
-            return MaxSequencingResult.builder().maxValue(ContextHelper.round2(arrayList.get(beginIndex)))
+            return MaxSequencingResult.builder()
                     .originMaxValue(arrayList.get(beginIndex))
                     .rightIndex(beginIndex)
                     .leftIndex(beginIndex).build();
@@ -85,7 +85,7 @@ public class MaxSequencingSubListSum_DCProcessor implements MaxSequencingProcess
         }
 
         if (rightMaxIndex == leftMaxIndex) {
-            return MaxSequencingResult.builder().originMaxValue(midValue).maxValue(ContextHelper.round2(midValue))
+            return MaxSequencingResult.builder().originMaxValue(midValue)
                     .leftIndex(leftMaxIndex)
                     .rightIndex(leftMaxIndex)
                     .build();
@@ -93,7 +93,6 @@ public class MaxSequencingSubListSum_DCProcessor implements MaxSequencingProcess
         float midMax = rightMax + leftMax - midValue;
         return MaxSequencingResult.builder()
                 .originMaxValue(midMax)
-                .maxValue(ContextHelper.round2(midMax))
                 .leftIndex(leftMaxIndex)
                 .rightIndex(rightMaxIndex)
                 .build();
