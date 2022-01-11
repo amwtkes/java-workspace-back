@@ -4,6 +4,8 @@ import com.xiaojin.algorithm.base.AlgorithmGeneralContext;
 import com.xiaojin.algorithm.base.AlgorithmGeneralProcessor;
 import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.MaxSequencingContext;
 import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.MaxSequencingProcessor;
+import com.xiaojin.algorithm.p_recursive.base.ClimbStairsContext;
+import com.xiaojin.algorithm.p_recursive.base.ClimbStairsProcessor;
 import org.springframework.stereotype.Service;
 import runtime.processor.defaultprocessor.DefaultProcessorResult;
 import runtime.processor.defaultprocessor.DefaultProcessorService;
@@ -25,5 +27,9 @@ public class AlgorithmProcessorLunchService extends DefaultProcessorService {
 
     public DefaultProcessorResult<Object> runMaxSequencingSubAlgorithm(List<MaxSequencingProcessor> processorList, MaxSequencingContext context) {
         return this.runProcessors(processorList, context);
+    }
+
+    public DefaultProcessorResult<Object> runClimbStairsAlgorithm(List<ClimbStairsProcessor> processors, ClimbStairsContext climbStairsContext) {
+        return this.runProcessors(processors, climbStairsContext);
     }
 }
