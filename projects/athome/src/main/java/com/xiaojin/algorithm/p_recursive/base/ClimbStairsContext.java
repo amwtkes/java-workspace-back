@@ -18,7 +18,7 @@ public class ClimbStairsContext extends AlgorithmGeneralContext {
     private int stairsNumber;
     private int climbSpan;
 
-    public void setResult(int totalCombinations) {
+    public void setResult2(int totalCombinations) {
         this.setResult(totalCombinations);
     }
 
