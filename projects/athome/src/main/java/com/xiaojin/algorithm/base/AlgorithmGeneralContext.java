@@ -33,4 +33,8 @@ public class AlgorithmGeneralContext extends DefaultProcessorContext<Object> {
             throw new ProcessorException("Input should not be null!");
         }
     }
+
+    protected String getAlgorithmResultInfo() {
+        return "";
+    }
 }
