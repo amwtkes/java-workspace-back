@@ -5,13 +5,13 @@ import com.xiaojin.algorithm.p_recursive.base.ClimbStairsContext;
 import com.xiaojin.algorithm.p_recursive.base.ClimbStairsProcessor;
 import org.springframework.stereotype.Component;
 import runtime.processor.annotation.SortOrder;
+import runtime.processor.baseprocessor.CommonProcessorConst;
 import runtime.processor.baseprocessor.ProcessorException;
 
 import static com.xiaojin.algorithm.base.ContextHelper.isNumeric;
-import static com.xiaojin.algorithm.p_recursive.base.ClimbStairPriority.INIT;
 
 @Component
-@SortOrder(INIT)
+@SortOrder(CommonProcessorConst.PROCESSOR_IGNORED)
 public class InitProcessor implements ClimbStairsProcessor {
     private long eclipseTime = 0L;
 
