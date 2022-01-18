@@ -29,7 +29,7 @@ public class KnapsackContext extends AlgorithmGeneralContext {
     @Data
     @AllArgsConstructor
     public static class Item {
-        private int weight;
         private int value;
+        private int weight;
     }
 }
