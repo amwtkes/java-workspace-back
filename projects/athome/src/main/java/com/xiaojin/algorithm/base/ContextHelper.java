@@ -1,7 +1,13 @@
 package com.xiaojin.algorithm.base;
 
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import runtime.processor.baseprocessor.ProcessorException;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -57,5 +63,26 @@ public class ContextHelper {
             }
         }
         return true;
+    }
+
+    public static String getInputStringFromClassPathFile(ResourceLoader resourceLoader, String filePath) throws ProcessorException, IOException {
+        Resource resource = resourceLoader.getResource("classpath:" + filePath);
+        BufferedReader reader = null;
+        try {
+            File file = resource.getFile();
+            reader = new BufferedReader(new FileReader(file));
+            String str;
+            StringBuilder stringBuffer = new StringBuilder();
+            while ((str = reader.readLine()) != null) {
+                stringBuffer.append(str);
+            }
+            return stringBuffer.toString();
+        } catch (IOException e) {
+            throw new ProcessorException(e.getMessage());
+        } finally {
+            if (reader != null) {
+                reader.close();
+            }
+        }
     }
 }

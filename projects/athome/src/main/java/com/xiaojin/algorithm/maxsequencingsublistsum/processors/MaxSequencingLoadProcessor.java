@@ -1,18 +1,17 @@
 package com.xiaojin.algorithm.maxsequencingsublistsum.processors;
 
-import com.xiaojin.algorithm.base.AlgorithmGeneralContext;
 import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.MaxSequencingContext;
 import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.MaxSequencingProcessor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 import runtime.processor.annotation.SortOrder;
 import runtime.processor.baseprocessor.ProcessorException;
 
-import java.io.*;
+import java.io.IOException;
 
+import static com.xiaojin.algorithm.base.ContextHelper.getInputStringFromClassPathFile;
 import static com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.M1ProcessorPriority.LOAD;
 
 @Component
@@ -23,21 +22,12 @@ public class MaxSequencingLoadProcessor implements MaxSequencingProcessor {
 
     @Override
     public void process(MaxSequencingContext algorithmGeneralContext) throws ProcessorException {
-        Resource resource = resourceLoader.getResource("classpath:MaxSequencingSublist/Data_Int.txt");
         try {
-            File file = resource.getFile();
-            BufferedReader reader = new BufferedReader(new FileReader(file));
-            String str;
-            StringBuilder stringBuffer = new StringBuilder();
-            while ((str = reader.readLine()) != null) {
-                stringBuffer.append(str);
-            }
-            algorithmGeneralContext.setInput(stringBuffer.toString());
-        } catch (
-                IOException e) {
+            String inputStringFromClassPathFile = getInputStringFromClassPathFile(resourceLoader, "MaxSequencingSublist/Data_Int.txt");
+            algorithmGeneralContext.setInput(inputStringFromClassPathFile);
+        } catch (IOException e) {
             throw new ProcessorException(e.getMessage());
         }
-
     }
 
     @Override
