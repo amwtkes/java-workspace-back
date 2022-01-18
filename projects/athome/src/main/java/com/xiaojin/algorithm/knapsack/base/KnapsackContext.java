@@ -16,6 +16,7 @@ public class KnapsackContext extends AlgorithmGeneralContext {
 
     private int knapsackWeightLimit;
     private List<Item> items;
+    private String itemSeparator = "-";
 
     public void setResult2(List<Integer> answerList) {
         this.setResult(answerList);
@@ -27,7 +28,7 @@ public class KnapsackContext extends AlgorithmGeneralContext {
 
     @Data
     @AllArgsConstructor
-    static class Item {
+    public static class Item {
         private int weight;
         private int value;
     }
