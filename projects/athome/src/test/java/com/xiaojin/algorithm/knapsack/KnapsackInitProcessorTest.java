@@ -27,7 +27,7 @@ class KnapsackInitProcessorTest {
             KnapsackContext knapsackContext = new KnapsackContext();
             knapsackLoaderProcessor.process(knapsackContext);
             knapsackInitProcessor.process(knapsackContext);
-            Assertions.assertEquals(5, knapsackContext.getItems().size());
+            Assertions.assertEquals(4, knapsackContext.getItems().size());
             Assertions.assertEquals(knapsackContext.getItems().get(3).getValue(), 9);
             Assertions.assertEquals(knapsackContext.getItems().get(3).getWeight(), 7);
         } catch (ProcessorException e) {

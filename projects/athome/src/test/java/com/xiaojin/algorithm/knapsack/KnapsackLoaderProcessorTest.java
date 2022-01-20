@@ -20,7 +20,7 @@ class KnapsackLoaderProcessorTest {
         KnapsackContext knapsackContext = new KnapsackContext();
         try {
             knapsackLoaderProcessor.process(knapsackContext);
-            Assertions.assertEquals("1-2,3-3,5-4,9-7,10-2", knapsackContext.getInput());
+            Assertions.assertEquals("1-2,3-3,5-4,9-7", knapsackContext.getInput());
         } catch (ProcessorException e) {
             e.printStackTrace();
         }
