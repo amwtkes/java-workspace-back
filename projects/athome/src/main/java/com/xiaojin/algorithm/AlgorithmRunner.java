@@ -1,5 +1,7 @@
 package com.xiaojin.algorithm;
 
+import com.xiaojin.algorithm.knapsack.base.KnapsackContext;
+import com.xiaojin.algorithm.knapsack.base.KnapsackProcessor;
 import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.MaxSequencingContext;
 import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.MaxSequencingProcessor;
 import com.xiaojin.algorithm.p_recursive.base.ClimbStairsContext;
@@ -19,6 +21,7 @@ public class AlgorithmRunner {
     private final AlgorithmProcessorLunchService lunchService;
     private final List<MaxSequencingProcessor> processorList;
     private final List<ClimbStairsProcessor> climbStairsProcessors;
+    private final List<KnapsackProcessor> knapsackProcessors;
 
     public String runMaxSequencingAlgorithm(MaxSequencingContext algorithmGeneralContext) {
         DefaultProcessorResult<Object> result = lunchService.runMaxSequencingSubAlgorithm(processorList, algorithmGeneralContext);
@@ -28,6 +31,11 @@ public class AlgorithmRunner {
 
     public String runClimbStairsAlgorithm(ClimbStairsContext climbStairsContext) {
         DefaultProcessorResult<Object> objectDefaultProcessorResult = lunchService.runClimbStairsAlgorithm(climbStairsProcessors, climbStairsContext);
+        return objectDefaultProcessorResult.getResult().toString();
+    }
+
+    public String runKnapsackAlgorithm(KnapsackContext knapsackContext) {
+        DefaultProcessorResult<Object> objectDefaultProcessorResult = lunchService.runKnapsackAlgorithm(knapsackProcessors, knapsackContext);
         return objectDefaultProcessorResult.getResult().toString();
     }
 }

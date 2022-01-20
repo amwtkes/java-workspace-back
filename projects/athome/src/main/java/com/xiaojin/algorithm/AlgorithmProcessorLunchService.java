@@ -2,6 +2,8 @@ package com.xiaojin.algorithm;
 
 import com.xiaojin.algorithm.base.AlgorithmGeneralContext;
 import com.xiaojin.algorithm.base.AlgorithmGeneralProcessor;
+import com.xiaojin.algorithm.knapsack.base.KnapsackContext;
+import com.xiaojin.algorithm.knapsack.base.KnapsackProcessor;
 import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.MaxSequencingContext;
 import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.MaxSequencingProcessor;
 import com.xiaojin.algorithm.p_recursive.base.ClimbStairsContext;
@@ -31,5 +33,9 @@ public class AlgorithmProcessorLunchService extends DefaultProcessorService {
 
     public DefaultProcessorResult<Object> runClimbStairsAlgorithm(List<ClimbStairsProcessor> processors, ClimbStairsContext climbStairsContext) {
         return this.runProcessors(processors, climbStairsContext);
+    }
+
+    public DefaultProcessorResult<Object> runKnapsackAlgorithm(List<KnapsackProcessor> processors, KnapsackContext knapsackContext) {
+        return this.runProcessors(processors, knapsackContext);
     }
 }

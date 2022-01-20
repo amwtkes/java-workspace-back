@@ -17,13 +17,15 @@ public class KnapsackContext extends AlgorithmGeneralContext {
     private int knapsackWeightLimit;
     private List<Item> items;
     private String itemSeparator = "-";
+    private int[][] table;
+    private int[][] markTable;
 
-    public void setResult2(List<Integer> answerList) {
-        this.setResult(answerList);
+    public void setResult2(int answer) {
+        this.setResult(answer);
     }
 
-    public List<Integer> getResult2() {
-        return (List<Integer>) getResult();
+    public Integer getResult2() {
+        return (Integer) getResult();
     }
 
     @Data
