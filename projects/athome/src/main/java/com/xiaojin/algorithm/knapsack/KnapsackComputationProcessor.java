@@ -72,7 +72,6 @@ public class KnapsackComputationProcessor implements KnapsackProcessor {
                 }
             }
         }
-        knapsackContext.setResult2(table[items.size()][knapsackWeightLimit]);
         knapsackContext.setTable(table);
         knapsackContext.setMarkTable(markTable);
     }

@@ -11,10 +11,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import runtime.processor.defaultprocessor.DefaultProcessorResult;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {KnapsackLoaderProcessor.class, KnapsackInitProcessor.class, KnapsackComputationProcessor.class, AlgorithmProcessorLunchService.class})
+@SpringBootTest(classes = {KnapsackLoaderProcessor.class, KnapsackInitProcessor.class, KnapsackComputationProcessor.class, KnapsackComputeResultVectorProcessor.class, AlgorithmProcessorLunchService.class})
 public class TestRunner {
     @Autowired
     private List<KnapsackProcessor> processorList;
@@ -27,6 +28,10 @@ public class TestRunner {
         knapsackContext.setKnapsackWeightLimit(10);
         DefaultProcessorResult<Object> objectDefaultProcessorResult = lunchService.runKnapsackAlgorithm(processorList, knapsackContext);
         Assertions.assertEquals(knapsackContext.getResult2(), 12);
+        int[] ret = {0, 1, 0, 1};
+        for (int i = 0; i < knapsackContext.getItems().size(); i++) {
+            Assertions.assertEquals(ret[i], knapsackContext.getResultVector().get(i));
+        }
     }
 
 }

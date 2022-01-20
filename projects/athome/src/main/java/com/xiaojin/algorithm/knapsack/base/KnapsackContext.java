@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
@@ -19,6 +20,7 @@ public class KnapsackContext extends AlgorithmGeneralContext {
     private String itemSeparator = "-";
     private int[][] table;
     private int[][] markTable;
+    private ArrayList<Integer> resultVector;
 
     public void setResult2(int answer) {
         this.setResult(answer);
