@@ -18,8 +18,8 @@ public class KnapsackContext extends AlgorithmGeneralContext {
     private int knapsackWeightLimit;
     private List<Item> items;
     private String itemSeparator = "-";
-    private int[][] table;
-    private int[][] markTable;
+    private int[][] table;//递推方程的缓存表
+    private int[][] markTable;//标记函数
     private ArrayList<Integer> resultVector;
 
     public void setResult2(int answer) {

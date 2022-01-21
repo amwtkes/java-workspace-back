@@ -30,6 +30,34 @@ public class KnapsackComputationProcessor implements KnapsackProcessor {
         innerComputation(knapsackContext);
     }
 
+    /**
+     * n-可用物品最大标号
+     * y-袋子能装的最大重量
+     * F(n)(y)表示此时的最大化价值
+     *
+     * F(n)(y) = max{F(n-1)(y),F(n)(y-Wn)+Vn}
+     * table就是缓存F(n)(y)的值
+     * k/y 1 2 3 4 5 6 7 8   9  10
+     * 1   0 1 1 2 2 3 3 4   4  5
+     * 2   0 1 3 3 4 6 6 7   9  9
+     * 3   0 1 3 5 5 6 8 10 10  11
+     * 4   0 1 3 5 5 6 9 10 10  12
+     *
+     * 标记函数表markTable，表示当可用的最大标记为n，背包承重为y的时候，达到最优的时候，最大标记的标号。
+     * M(n)(y) => if F(n-1)(y) >F(n)(y-Wi)+Vi = F(n-1)(y)  if F(n-1)(y)<=F(n)(y-Wi)+Vi = n
+     * 如果可以使用物品n则最大标号为n，则M函数值为n，否则递归到M(n-1)(y).
+     *
+     * example:
+     * v1=1 v2=3 v3=5 v4=9
+     * w1=2 w2=3 w3=4 w4=7
+     * b=10
+     *
+     * k/y 1 2 3 4 5 6 7 8 9 10
+     * 1   0 1 1 1 1 1 1 1 1 1
+     * 2   0 1 2 2 2 2 2 2 2 2
+     * 3   0 1 2 3 3 3 3 3 3 3
+     * 4   0 1 2 3 3 3 4 3 4 4
+     */
     private void innerComputation(KnapsackContext knapsackContext) {
         int numberOfItems = knapsackContext.getItems().size();
         int knapsackWeightLimit = knapsackContext.getKnapsackWeightLimit();

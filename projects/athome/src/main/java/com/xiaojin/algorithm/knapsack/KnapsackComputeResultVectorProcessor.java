@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class KnapsackComputeResultVectorProcessor implements KnapsackProcessor {
     @Override
     public void process(KnapsackContext knapsackContext) throws ProcessorException {
+        //结果表。i为index，值表示有多少个该物品
         int[] markVectorArray = new int[knapsackContext.getItems().size() + 1];
         for (int i = knapsackContext.getItems().size(), j = knapsackContext.getKnapsackWeightLimit(); i > 0 && j > 0; ) {
             int maxMarkIndex = knapsackContext.getMarkTable()[i][j];
