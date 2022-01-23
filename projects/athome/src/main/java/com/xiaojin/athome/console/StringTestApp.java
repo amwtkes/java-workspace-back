@@ -19,6 +19,7 @@ public class StringTestApp {
          * 3、对于String s = "string"——语义是它就是当做一个常量来使用，所以从运行时常量池中取出来后，就直接去"全局字符串常量池了"也就是StringTable；
          * 4、对于new出来的字符串，语义是可变的，课操作的，它是不能当做常量使用的，所以默认不会进入"全局字符串常量池"。而是在堆上另外开辟空间存储。当然，stringtable中也是引用，具体的字符串还是在堆上存着的。直到调用intern()方法；
          * 5、intern()方法，语义是，将一个字符串放入全局字符串常量池，如果存在则返回引用；如果不存在则分配并将引用存在stringtable中。
+         * https://cloud.tencent.com/developer/article/1450501
          */
     }
 }
