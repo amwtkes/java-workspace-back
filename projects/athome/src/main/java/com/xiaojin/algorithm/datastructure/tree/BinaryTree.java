@@ -7,21 +7,10 @@ import java.util.LinkedList;
 @Data
 public class BinaryTree<T> {
     public static void main(String[] args) {
-        BinaryTree<Integer> tree = new BinaryTree<>();
-        tree.setWhenReachLastElementOfALevel(integerTreeNode -> System.out.println());
-        TreeNode<Integer> root = new TreeNode<>(0, TreeNodePos.Root, null, null, null);
-
-        tree.add(root);
-        for (int i = 0; i < 7; i++) {
-            TreeNode<Integer> node = new TreeNode<>();
-            node.setValue(i + 1);
-            tree.add(node);
-        }
-        System.out.println(tree.getNodeCount());
-        tree.travel(node -> System.out.print(node.getValue()));
     }
 
     private int nodeCount;
+    private int level;
     private TreeNode<T> root;
     private TreeNode<T> currentNode;
     private TreeNodeAction<TreeNode<T>> whenReachLastElementOfALevel;
@@ -33,6 +22,7 @@ public class BinaryTree<T> {
             node.setParent(null);
             this.currentNode = this.root;
             nodeCount++;
+            level++;
             return;
         }
 
@@ -47,6 +37,7 @@ public class BinaryTree<T> {
             this.currentNode = node;
             node.setParent(this.getRoot());
             nodeCount++;
+            level++;
             return;
         }
 
@@ -73,6 +64,7 @@ public class BinaryTree<T> {
         //找到转折点，并将指针指向转折点的right
         if (tmp.getTreeNodePos() == TreeNodePos.Root) {
             tmp = tmp.getLeft();
+            tree.setLevel(tree.getLevel() + 1);
         } else if (tmp.getTreeNodePos() == TreeNodePos.Left) {
             tmp = tmp.getParent().getRight();
         }
