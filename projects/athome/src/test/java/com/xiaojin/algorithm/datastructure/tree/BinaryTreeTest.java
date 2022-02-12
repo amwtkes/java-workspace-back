@@ -11,10 +11,10 @@ class BinaryTreeTest {
             System.out.print("--->");
             System.out.println();
         });
-        TreeNode<Integer> root = new TreeNode<>(0, TreeNodePos.Root, null, null, null);
+        TreeNode<Integer> root = new TreeNode<>(1, TreeNodePos.Root, null, null, null);
 
         tree.add(root);
-        for (int i = 0; i < 450; i++) {
+        for (int i = 1; i < 512; i++) {
             TreeNode<Integer> node = new TreeNode<>();
             node.setValue(i + 1);
             tree.add(node);

@@ -98,8 +98,6 @@ public class BinaryTree<T> {
             if (last.getRight() != null) {
                 queue.addFirst(last.getRight());
             }
-
-
         }
     }
 }
