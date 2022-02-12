@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.LinkedList;
 
 @Data
-public class BinaryTree<T> {
+public class CompleteBinaryTree<T> {
     public static void main(String[] args) {
     }
 
@@ -55,7 +55,7 @@ public class BinaryTree<T> {
         }
     }
 
-    private void insertWhenPosRight(BinaryTree<T> tree, TreeNode<T> node) {
+    private void insertWhenPosRight(CompleteBinaryTree<T> tree, TreeNode<T> node) {
         TreeNode<T> currentNode = tree.getCurrentNode();
         TreeNode<T> tmp = currentNode.getParent();
         while (tmp.getTreeNodePos() == TreeNodePos.Right && tmp != tree.getRoot()) {

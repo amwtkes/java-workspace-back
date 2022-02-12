@@ -6,7 +6,7 @@ class BinaryTreeTest {
 
     @Test
     void add() {
-        BinaryTree<Integer> tree = new BinaryTree<>();
+        CompleteBinaryTree<Integer> tree = new CompleteBinaryTree<>();
         tree.setWhenReachLastElementOfALevel(integerTreeNode -> {
             System.out.print("--->");
             System.out.println();
