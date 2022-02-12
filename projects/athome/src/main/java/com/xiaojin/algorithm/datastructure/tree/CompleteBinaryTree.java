@@ -114,7 +114,14 @@ public class CompleteBinaryTree<T> {
         private int level;
     }
 
-    //
+    /*
+    利用队列+栈的方式进行交错输出
+    队列是顺序，栈是逆序。所以将顺序的元素加入栈就变成逆序，再入一次栈就是顺序，从而实现交错输出的效果。
+    1、入栈的时候，左右子节点谁先入栈要考虑。
+    2、逆序的时候左-》右
+    3、顺序的时候右-》左
+    4、每次切换左右入栈顺序的前提是，队列里的元素都退干净了。
+    * */
     public void SwirlTravel(TreeNodeAction<TreeNode<T>> fromRootAction) {
         LinkedList<TreeNode<T>> queue = new LinkedList<>();
         Stack<TreeNode<T>> stack = new Stack<>();
