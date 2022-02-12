@@ -1,8 +1,10 @@
 package com.xiaojin.algorithm.datastructure.tree;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.LinkedList;
+import java.util.Stack;
 
 @Data
 public class CompleteBinaryTree<T> {
@@ -102,6 +104,61 @@ public class CompleteBinaryTree<T> {
             if (last.getRight() != null) {
                 queue.addFirst(last.getRight());
             }
+        }
+    }
+
+    @Builder
+    @Data
+    static class TravelContext {
+        private int count;
+        private int level;
+    }
+
+    //
+    public void SwirlTravel(TreeNodeAction<TreeNode<T>> fromRootAction) {
+        LinkedList<TreeNode<T>> queue = new LinkedList<>();
+        Stack<TreeNode<T>> stack = new Stack<>();
+        TravelContext context = new TravelContext(0, 1);
+        queue.addFirst(this.getRoot());
+        boolean isSequential = true;
+        TreeNode<T> first;
+        while (!queue.isEmpty()) {
+            //队列必须退干净然后改变入栈的顺序。
+            while (!queue.isEmpty()) {
+                first = queue.removeFirst();
+                dealWithNode(context, first, fromRootAction);
+                if (isSequential) {//当输出逆序的时候，先左入栈再右
+                    if (first.getLeft() != null) {
+                        stack.push(first.getLeft());
+                    }
+                    if (first.getRight() != null) {
+                        stack.push(first.getRight());
+                    }
+                } else {
+                    if (first.getRight() != null) {
+                        stack.push(first.getRight());
+                    }
+                    if (first.getLeft() != null) {
+                        stack.push(first.getLeft());
+                    }
+                }
+            }
+            isSequential = !isSequential;
+            while (!stack.isEmpty()) {
+                queue.addLast(stack.pop());
+            }
+        }
+    }
+
+    private void dealWithNode(TravelContext context, TreeNode<T> first, TreeNodeAction<TreeNode<T>> fromRootAction) {
+        //dowork
+        fromRootAction.doWork(first);
+
+        context.setCount(context.getCount() + 1);
+        //判断是否是层结束
+        if (context.getCount() == ((int) Math.pow(2, context.getLevel())) - 1) {
+            this.whenReachLastElementOfALevel.doWork(first);
+            context.setLevel(context.getLevel() + 1);
         }
     }
 }

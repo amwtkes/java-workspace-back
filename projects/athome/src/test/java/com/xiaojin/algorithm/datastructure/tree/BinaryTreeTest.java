@@ -22,7 +22,7 @@ class BinaryTreeTest {
         System.out.println("Total:"+tree.getNodeCount());
         System.out.println("level:"+tree.getLevel());
         System.out.println("=========");
-        tree.travel(node -> System.out.print(node.getValue() + " "));
+        tree.SwirlTravel(node -> System.out.print(node.getValue() + " "));
 
     }
 
