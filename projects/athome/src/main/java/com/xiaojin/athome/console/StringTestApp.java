@@ -23,5 +23,22 @@ public class StringTestApp {
          *
          * 6、class常量池是编译后的常量池，运行时常量池是加载后准备计算的常量池——还包括符号表，行号，方法名等信息（一个线程一个把）；字符串常量池就是全局的。
          */
+
+        String source = "hello";
+        changeStr(source);
+        System.out.println(source);
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("hello");
+        changeStr(sb);
+        System.out.println(sb.toString());
+    }
+
+    public static void changeStr(String source) {
+        source = source + " change";
+    }
+
+    public static void changeStr(StringBuilder sb) {
+        sb.append(" changed!");
     }
 }
