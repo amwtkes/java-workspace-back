@@ -5,7 +5,7 @@ public class StringTestApp {
         String str1 = new StringBuilder("计算机").append("软件").toString();
         System.out.println(str1.intern() == str1);
 
-        String str2 = new StringBuilder("ja").append("va").toString();
+        String str2 = new StringBuilder("ja").append("va").toString();//因为"java"这个字符串是字符串常量池中有的，所以intern以后取的是常量池中的"java"。str2因为是new出来的对象，所以还在堆上。
         System.out.println(str2.intern() == str2);
         String s = "xiaojin";
         String s1 = "xiao";
