@@ -2,22 +2,28 @@ package com.xiaojin.algorithm.LCS.processors1;
 
 import com.xiaojin.algorithm.LCS.base.Lcs1Context;
 import com.xiaojin.algorithm.LCS.base.Lcs1Processor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import runtime.processor.annotation.SortOrder;
 import runtime.processor.baseprocessor.ProcessorException;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
+import static com.xiaojin.algorithm.LCS.processors1.Lcs1Priority.COMPUTATION;
+
+@Component
+@SortOrder(COMPUTATION)
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class Lcs1ComputationProcessor implements Lcs1Processor {
     @Override
     public void process(Lcs1Context lcs1Context) throws ProcessorException {
         lcs1Context.assertInputNotBeNull();
         List<Integer> items = lcs1Context.getItems();
         Map<Integer, Integer> map = lcs1Context.getMap();
-        if (map == null) {
-            map = new ConcurrentHashMap<>();
-        }
+
         Integer maxLength = 0;
         Integer maxLengthKey = 0;
         for (Integer e : items) {
