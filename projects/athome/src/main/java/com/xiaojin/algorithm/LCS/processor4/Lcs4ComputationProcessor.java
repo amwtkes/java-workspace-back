@@ -37,6 +37,19 @@ public class Lcs4ComputationProcessor implements Lcs4Processor {
         return ret;
     }
 
+    /**
+     * mark函数标记函数的作用就是在取得最大值得情况下，找到取最大值得元素
+     *
+     * 可以用你运算来求解。这里主要是为了快，就可以直接将compute函数的过程拷贝过来，
+     * 然后在+1的地方记录index就可以得到一个解。
+     *
+     * 当然有多个解。为啥是这个解的原因在于各个分支都是用>来判断的。
+     *
+     * if ((dp[i - 1][i] + 1) > dp[i - 1][j]) {
+     *                 ret.add(i);
+     *                 markInner(ret, items, dp, i - 1, i);
+     * 比如这个，就忽略了==的情况，其实也是一个解。
+     */
     private void markInner(List<Integer> ret, List<Integer> items, int[][] dp, int i, int j) {
         if (i < 0 || j <= 0 || (i > j)) {
             return;
