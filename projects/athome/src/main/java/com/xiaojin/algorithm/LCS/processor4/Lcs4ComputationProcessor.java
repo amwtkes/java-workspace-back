@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import runtime.processor.annotation.SortOrder;
 import runtime.processor.baseprocessor.ProcessorException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.xiaojin.algorithm.LCS.processor4.Lcs4Priority.COMPUTATION;
@@ -24,7 +25,59 @@ public class Lcs4ComputationProcessor implements Lcs4Processor {
                 computation(lcs4Context.getItems(), dp, i, j);
             }
         }
+        List<Integer> ret = markFunction(lcs4Context.getItems(), dp);
+        lcs4Context.setResultAndFinish(ret);
+    }
 
+    private List<Integer> markFunction(List<Integer> items, int[][] dp) {
+        int length = items.size();
+        int maxValue = dp[length - 1][length - 1];
+        List<Integer> ret = new ArrayList<>(maxValue);
+        markInner(ret, items, dp, length - 1, length - 1);
+        return ret;
+    }
+
+    private void markInner(List<Integer> ret, List<Integer> items, int[][] dp, int i, int j) {
+        if (i < 0 || j <= 0 || (i > j)) {
+            return;
+        }
+
+        if (i == 0 && items.get(i) < items.get(j)) {
+            ret.add(i);
+            return;
+        }
+
+        if (i == j) {
+            if ((dp[i - 1][i] + 1) > dp[i - 1][j - 1]) {
+                markInner(ret, items, dp, i - 1, i);
+                ret.add(i);
+            } else {
+                markInner(ret, items, dp, i - 1, j - 1);
+            }
+//            dp[i][j] = Math.max(dp[i - 1][i] + 1, dp[i - 1][j - 1]);
+            return;
+        }
+
+        if (items.get(i).equals(items.get(j))) {
+            markInner(ret, items, dp, i - 1, j);
+//            dp[i][j] = dp[i - 1][j];
+            return;
+        }
+
+        if (items.get(i) > items.get(j)) {
+            markInner(ret, items, dp, i - 1, j);
+//            dp[i][j] = dp[i - 1][j];
+            return;
+        }
+        if (items.get(i) < items.get(j)) {
+            if ((dp[i - 1][i] + 1) > dp[i - 1][j]) {
+                ret.add(i);
+                markInner(ret, items, dp, i - 1, i);
+            } else {
+                markInner(ret, items, dp, i - 1, j);
+            }
+//            dp[i][j] = Math.max(dp[i - 1][i] + 1, dp[i - 1][j]);
+        }
     }
 
     /**
