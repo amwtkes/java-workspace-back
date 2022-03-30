@@ -4,6 +4,7 @@ import com.xiaojin.algorithm.base.AlgorithmGeneralContext;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
@@ -14,4 +15,7 @@ public class Lcs2Context extends AlgorithmGeneralContext {
     public List<Integer> getResult() {
         return (List<Integer>) this.getProcessorResult().getResult();
     }
+
+    //for lcs3
+    private List<Integer> A = new ArrayList<>();
 }
