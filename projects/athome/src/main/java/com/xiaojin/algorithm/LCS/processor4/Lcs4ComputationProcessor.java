@@ -49,8 +49,8 @@ public class Lcs4ComputationProcessor implements Lcs4Processor {
 
         if (i == j) {
             if ((dp[i - 1][i] + 1) > dp[i - 1][j - 1]) {
-                markInner(ret, items, dp, i - 1, i);
                 ret.add(i);
+                markInner(ret, items, dp, i - 1, i);
             } else {
                 markInner(ret, items, dp, i - 1, j - 1);
             }
