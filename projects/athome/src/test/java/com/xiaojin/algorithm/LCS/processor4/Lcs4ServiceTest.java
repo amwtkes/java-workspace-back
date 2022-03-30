@@ -18,6 +18,9 @@ class Lcs4ServiceTest {
     @Test
     public void test() {
         List<Integer> run = lcs4Service.run("lcs/2.txt");
+        Assertions.assertEquals(2, run.size());
+
+        run = lcs4Service.run("lcs/1.txt");
         Assertions.assertEquals(8, run.size());
     }
 }
