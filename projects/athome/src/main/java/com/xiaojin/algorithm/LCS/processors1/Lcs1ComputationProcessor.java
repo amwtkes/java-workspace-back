@@ -57,7 +57,7 @@ public class Lcs1ComputationProcessor implements Lcs1Processor {
             }
         }
         List<Integer> resultList = genResultList(map, maxLength, maxLengthKey);
-        lcs1Context.setResult(resultList);
+        lcs1Context.setResultAndFinish(resultList);
     }
 
     private List<Integer> genResultList(Map<Integer, Integer> map, Integer maxLength, Integer maxLengthKey) throws ProcessorException {

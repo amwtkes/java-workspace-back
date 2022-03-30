@@ -40,7 +40,7 @@ public class Lcs2ComputationProcessor implements Lcs2Processor {
         Integer maxLengthKey = max.get().getKey();
 
         List<Integer> resultList = genResultList(mergedMap, maxLength, maxLengthKey);
-        lcs2Context.setResult(resultList);
+        lcs2Context.setResultAndFinish(resultList);
     }
 
     private List<Integer> toSetList(Lcs2Context lcs2Context) {

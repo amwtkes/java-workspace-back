@@ -20,7 +20,7 @@ public class AlgorithmGeneralContext extends DefaultProcessorContext<Object> {
         this.setFinished(true);
     }
 
-    public void setResult(Object result) {
+    public void setResultAndFinish(Object result) {
         finish(result);
     }
 

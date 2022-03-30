@@ -23,7 +23,7 @@ public class KnapsackContext extends AlgorithmGeneralContext {
     private ArrayList<Integer> resultVector;
 
     public void setResult2(int answer) {
-        this.setResult(answer);
+        this.setResultAndFinish(answer);
     }
 
     public Integer getResult2() {

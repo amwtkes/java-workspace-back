@@ -29,7 +29,7 @@ public class Lcs3Phase2Processor implements Lcs3Processor {
         for (int i = maxLength; i > 0; i--) {
             ret.add(maxValue - i + 1);
         }
-        lcs2Context.setResult(ret);
+        lcs2Context.setResultAndFinish(ret);
     }
 
     @Override

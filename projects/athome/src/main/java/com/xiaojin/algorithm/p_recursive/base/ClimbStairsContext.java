@@ -19,7 +19,7 @@ public class ClimbStairsContext extends AlgorithmGeneralContext {
     private int climbSpan;
 
     public void setResult2(int totalCombinations) {
-        this.setResult(totalCombinations);
+        this.setResultAndFinish(totalCombinations);
     }
 
     public int getResult2() {
