@@ -1,6 +1,5 @@
 package com.xiaojin.algorithm.LCS.processor4;
 
-import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +17,7 @@ class Lcs4ServiceTest {
 
     @Test
     public void test() {
-        List<Integer> run = lcs4Service.run();
+        List<Integer> run = lcs4Service.run("lcs/2.txt");
         Assertions.assertEquals(8, run.size());
     }
 }

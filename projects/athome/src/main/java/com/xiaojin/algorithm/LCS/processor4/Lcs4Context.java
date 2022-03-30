@@ -11,4 +11,5 @@ import java.util.List;
 public class Lcs4Context extends AlgorithmGeneralContext {
     private int[][] dp = null;
     private List<Integer> items = null;
+    private String dataFilePath = "lcs/1.txt";
 }

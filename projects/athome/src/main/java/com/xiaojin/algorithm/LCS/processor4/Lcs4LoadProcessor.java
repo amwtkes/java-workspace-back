@@ -24,7 +24,7 @@ public class Lcs4LoadProcessor implements Lcs4Processor {
     public void process(Lcs4Context lcs4Context) throws ProcessorException {
         String inputStringFromClassPathFile = null;
         try {
-            inputStringFromClassPathFile = getInputStringFromClassPathFile(resourceLoader, "lcs/1.txt");
+            inputStringFromClassPathFile = getInputStringFromClassPathFile(resourceLoader, lcs4Context.getDataFilePath());
             lcs4Context.setInput(inputStringFromClassPathFile);
             ArrayList<Integer> items = ContextHelper.splitter(lcs4Context, Integer.MAX_VALUE);
             lcs4Context.setItems(items);
