@@ -24,15 +24,14 @@ public class Lcs4ComputationProcessor implements Lcs4Processor {
                 computation(lcs4Context.getItems(), dp, i, j);
             }
         }
+
     }
 
     /**
      * 计算函数
-     *
-     * @param items
-     * @param dp
-     * @param i     可选值得索引最大值
-     * @param j     不能超过的最大值的索引值。也就是后面一个元素的索引值。
+     * <p>
+     * i     可选值得索引最大值
+     * j     不能超过的最大值的索引值。也就是后面一个元素的索引值。
      */
     private void computation(List<Integer> items, int[][] dp, int i, int j) {
         if (i < 0 || j < 0) {
@@ -81,7 +80,11 @@ public class Lcs4ComputationProcessor implements Lcs4Processor {
         }
 
         if (items.get(i) > items.get(j)) {
-            dp[i][j] = Math.max(dp[i][i], dp[i - 1][j]);
+            /**
+             * 不需要包含dp[i-1][i-1]因为这个对称轴上的元素只能是从i==j这个分支下来的。不能包含在有前序节点的情况下，
+             * 因为这样的话，在递归过程中可能会出现a[n]<a[i-1] n>i的情况，误认为要+1
+             */
+            dp[i][j] = dp[i - 1][j];
             return;
         }
         if (items.get(i) < items.get(j)) {
