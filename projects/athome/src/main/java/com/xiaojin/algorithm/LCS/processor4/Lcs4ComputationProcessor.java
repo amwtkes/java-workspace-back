@@ -68,7 +68,7 @@ public class Lcs4ComputationProcessor implements Lcs4Processor {
             /**
              * 选择这个元素与不选择这个元素
              */
-            dp[i][j] = Math.max(dp[i - 1][j] + 1, dp[i - 1][j - 1]);
+            dp[i][j] = Math.max(dp[i - 1][i] + 1, dp[i - 1][j - 1]);
             return;
         }
         /**
