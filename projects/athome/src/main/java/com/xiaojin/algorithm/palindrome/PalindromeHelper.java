@@ -16,4 +16,11 @@ public class PalindromeHelper {
         sharpChars[sourceStr.length() * 2] = '#';
         return new String(sharpChars);
     }
+
+    public static String deleteSharpOfAString(String sourceStr) {
+        if (Strings.isBlank(sourceStr)) {
+            return Strings.EMPTY;
+        }
+        return sourceStr.replace("#", "");
+    }
 }
