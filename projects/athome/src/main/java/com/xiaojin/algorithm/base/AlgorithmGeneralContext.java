@@ -9,6 +9,7 @@ import runtime.processor.defaultprocessor.DefaultProcessorContext;
 @Data
 public class AlgorithmGeneralContext extends DefaultProcessorContext<Object> {
     private String input;
+    private String inputDataPath;
 
     public AlgorithmGeneralContext() {
         super();
