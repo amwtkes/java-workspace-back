@@ -14,7 +14,7 @@ class P1LoadProcessorTest {
     @Autowired
     private P1Processor p1Processor;
 
-    @Test
+//    @Test
     public void test() throws ProcessorException {
         P1Context p1Context = new P1Context("palindrome/1.txt");
         p1Processor.process(p1Context);

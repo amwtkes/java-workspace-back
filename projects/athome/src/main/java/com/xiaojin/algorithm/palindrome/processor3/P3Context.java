@@ -20,5 +20,5 @@ public class P3Context extends AlgorithmGeneralContext {
      * dp[i][j]=boolean - 代表[i->j]以i为开头j为结尾的子串是否为回文
      * dp[i][j] = true if a[i]==a[j] && dp[i][j]=ture
      */
-    private int dp[][];
+    private boolean dp[][];
 }

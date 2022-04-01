@@ -18,4 +18,10 @@ class P2ServiceTest {
         String run = p2Service.run("palindrome/1.txt");
         Assertions.assertEquals("acabacabaca", run);
     }
+
+    @Test
+    public void test2() {
+        String run = p2Service.run("palindrome/2.txt");
+        Assertions.assertEquals("acabaabaca", run);
+    }
 }

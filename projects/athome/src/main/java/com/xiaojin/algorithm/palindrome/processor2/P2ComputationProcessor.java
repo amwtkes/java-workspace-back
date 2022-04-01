@@ -46,7 +46,7 @@ public class P2ComputationProcessor implements P2Processor {
                 rightMax = i;
             }
         }
-        p2Context.setResultAndFinish(PalindromeHelper.deleteSharpOfAString(sourceStr.substring(leftMax, rightMax)));
+        p2Context.setResultAndFinish(sourceStr.substring(leftMax, rightMax + 1));
     }
 
     /**

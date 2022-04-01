@@ -1,4 +1,4 @@
-package com.xiaojin.algorithm.palindrome.processor2;
+package com.xiaojin.algorithm.palindrome.processor3;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,20 +11,20 @@ import java.io.IOException;
 
 import static com.xiaojin.algorithm.base.ContextHelper.getInputStringFromClassPathFile;
 import static com.xiaojin.algorithm.palindrome.PalindromeHelper.addSharpToString;
-import static com.xiaojin.algorithm.palindrome.processor2.P2Priority.LOAD;
+import static com.xiaojin.algorithm.palindrome.processor3.P3Priority.LOAD;
 
 @Component
 @SortOrder(LOAD)
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class P2LoadProcessor implements P2Processor {
+public class P3LoadProcessor implements P3Processor {
     private final ResourceLoader resourceLoader;
 
     @Override
-    public void process(P2Context p2Context) throws ProcessorException {
+    public void process(P3Context p3Context) throws ProcessorException {
         try {
-            String inputStringFromClassPathFile = getInputStringFromClassPathFile(resourceLoader, p2Context.getInputDataPath());
-            //这个dp的方法因为没有用到中心向两侧扩展的过程，所以不用sharp填充
-            p2Context.setInput(inputStringFromClassPathFile);
+            String inputStringFromClassPathFile = getInputStringFromClassPathFile(resourceLoader, p3Context.getInputDataPath());
+            //sharp处理原始字符串，长度变成奇数，同时不影响最后的结果。
+            p3Context.setInput(addSharpToString(inputStringFromClassPathFile));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -32,6 +32,6 @@ public class P2LoadProcessor implements P2Processor {
 
     @Override
     public String getProcessorName() {
-        return "p2 loading...";
+        return "Palindrome3 loading...";
     }
 }
