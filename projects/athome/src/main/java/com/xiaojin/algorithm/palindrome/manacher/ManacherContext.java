@@ -1,8 +1,12 @@
 package com.xiaojin.algorithm.palindrome.manacher;
 
 import com.xiaojin.algorithm.base.AlgorithmGeneralContext;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.apache.logging.log4j.util.Strings;
 
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class ManacherContext extends AlgorithmGeneralContext {
     public ManacherContext(String dataPath) {
         if (Strings.isBlank(dataPath)) {
@@ -11,4 +15,6 @@ public class ManacherContext extends AlgorithmGeneralContext {
         }
         this.setInputDataPath(dataPath);
     }
+
+    private int[] dp;
 }
