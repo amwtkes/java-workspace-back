@@ -10,7 +10,6 @@ import runtime.processor.baseprocessor.ProcessorException;
 import java.io.IOException;
 
 import static com.xiaojin.algorithm.base.ContextHelper.getInputStringFromClassPathFile;
-import static com.xiaojin.algorithm.palindrome.PalindromeHelper.addSharpToString;
 import static com.xiaojin.algorithm.palindrome.processor2.P2Priority.LOAD;
 
 @Component
