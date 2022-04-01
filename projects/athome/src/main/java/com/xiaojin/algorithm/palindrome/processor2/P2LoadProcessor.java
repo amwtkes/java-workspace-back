@@ -1,4 +1,4 @@
-package com.xiaojin.algorithm.palindrome.processor1;
+package com.xiaojin.algorithm.palindrome.processor2;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,25 +11,19 @@ import java.io.IOException;
 
 import static com.xiaojin.algorithm.base.ContextHelper.getInputStringFromClassPathFile;
 import static com.xiaojin.algorithm.palindrome.PalindromeHelper.addSharpToString;
-import static com.xiaojin.algorithm.palindrome.processor1.P1Priority.LOAD;
+import static com.xiaojin.algorithm.palindrome.processor2.P2Priority.LOAD;
 
 @Component
 @SortOrder(LOAD)
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class P1LoadProcessor implements P1Processor {
+public class P2LoadProcessor implements P2Processor {
     private final ResourceLoader resourceLoader;
 
     @Override
-    public void process(P1Context p1Context) throws ProcessorException {
+    public void process(P2Context p2Context) throws ProcessorException {
         try {
-            String inputStringFromClassPathFile = getInputStringFromClassPathFile(resourceLoader, p1Context.getInputDataPath());
-            /**
-             * 为啥要加#？
-             * abba这种情况（偶数的回文），如果不加#，就找不到中心轴，加上以后
-             * #a#b#b#a# 变成奇数 回文就有了中心轴 而且最后去掉#
-             * 就会还原。
-             */
-            p1Context.setInput(addSharpToString(inputStringFromClassPathFile));
+            String inputStringFromClassPathFile = getInputStringFromClassPathFile(resourceLoader, p2Context.getInputDataPath());
+            p2Context.setInput(addSharpToString(inputStringFromClassPathFile));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -37,6 +31,6 @@ public class P1LoadProcessor implements P1Processor {
 
     @Override
     public String getProcessorName() {
-        return "p1 loading...";
+        return "p2 loading...";
     }
 }
