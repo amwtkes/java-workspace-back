@@ -30,7 +30,7 @@ public class P2ComputationProcessor implements P2Processor {
                 continue;
             }
             //i要跟A[i-1]的前一个元素去比较，才能扩展
-            //如果A[i-1]==0 则[0 -> i-1]是一个回文，则只能判断[0->i]是否为回文，而不应该判断 a[A[i-1]-1] == a[i]因为溢出
+            //如果A[i-1]==0 则[0 -> i-1]是一个回文，则只能判断[0->i]是否为回文，而不应该判断 a[A[i-1]-1] == a[i]因为溢出(只能退化成n^2的方法)
             if (A[i - 1] != 0 && sourceStr.charAt(i) == sourceStr.charAt(A[i - 1] - 1)) {
                 A[i] = A[i - 1] - 1;
             } else {
