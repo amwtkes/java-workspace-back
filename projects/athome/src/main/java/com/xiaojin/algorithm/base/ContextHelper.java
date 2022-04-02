@@ -1,5 +1,6 @@
 package com.xiaojin.algorithm.base;
 
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import runtime.processor.baseprocessor.ProcessorException;
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ContextHelper {
     public static <T> ArrayList<T> splitter(AlgorithmGeneralContext algorithmGeneralContext, T t) throws ProcessorException {
@@ -77,6 +79,29 @@ public class ContextHelper {
                 stringBuffer.append(str);
             }
             return stringBuffer.toString();
+        } catch (IOException e) {
+            throw new ProcessorException(e.getMessage());
+        } finally {
+            if (reader != null) {
+                reader.close();
+            }
+        }
+    }
+
+    public static List<String> getInputStringListFromClassPathFile(ResourceLoader resourceLoader, String filePath) throws ProcessorException, IOException {
+        Resource resource = resourceLoader.getResource("classpath:" + filePath);
+        BufferedReader reader = null;
+        List<String> ret = new ArrayList<>(8);
+        try {
+            File file = resource.getFile();
+            reader = new BufferedReader(new FileReader(file));
+            String str;
+            while ((str = reader.readLine()) != null) {
+                if (Strings.isNotBlank(str)) {
+                    ret.add(str);
+                }
+            }
+            return ret;
         } catch (IOException e) {
             throw new ProcessorException(e.getMessage());
         } finally {
