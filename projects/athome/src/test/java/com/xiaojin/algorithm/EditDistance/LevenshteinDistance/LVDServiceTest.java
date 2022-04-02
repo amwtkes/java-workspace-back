@@ -36,4 +36,16 @@ class LVDServiceTest {
         LVDContext.LVDResult run = lvdService.run("EditDistance/4.txt");
         Assertions.assertEquals(run.getMinLength(), 2);
     }
+
+    @Test
+    public void test5() {
+        LVDContext.LVDResult run = lvdService.run("EditDistance/5.txt");
+        Assertions.assertEquals(run.getMinLength(), 2);
+    }
+
+    @Test
+    public void test6() {
+        LVDContext.LVDResult run = lvdService.run("EditDistance/6.txt");
+        Assertions.assertEquals(run.getMinLength(), 2);
+    }
 }
