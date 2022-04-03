@@ -21,4 +21,10 @@ class RpServiceTest {
         List<Pair<Integer, Integer>> run = rpService.run("reverse_pair/1.txt");
         Assertions.assertEquals(17, run.size());
     }
+
+    @Test
+    public void test2() {
+        List<Pair<Integer, Integer>> run = rpService.run("reverse_pair/2.txt");
+        Assertions.assertEquals(3, run.size());
+    }
 }
