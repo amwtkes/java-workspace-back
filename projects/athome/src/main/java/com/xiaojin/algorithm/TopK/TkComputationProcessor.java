@@ -66,6 +66,9 @@ public class TkComputationProcessor implements TkProcessor {
         if (items.get(rightIndex) < midValue) {
             rightIndex++;
         } else {
+            /*
+             * leftIndex如果没有移动过，RightIndex会向左靠拢直到跟leftIndex相等，这时候--会导致leftIndex<lo
+             */
             leftIndex--;
         }
 
