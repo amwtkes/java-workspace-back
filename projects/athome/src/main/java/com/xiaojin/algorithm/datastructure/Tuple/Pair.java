@@ -26,6 +26,11 @@ public class Pair<T1, T2> {
     private T2 value2;
 
     @Override
+    public String toString() {
+        return this.value1.toString() + " " + this.value2.toString();
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (o == this) {
             return true;
