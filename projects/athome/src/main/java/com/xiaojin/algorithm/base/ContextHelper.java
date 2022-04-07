@@ -20,7 +20,11 @@ public class ContextHelper {
             throw new ProcessorException("Context can't be null!");
         }
         algorithmGeneralContext.assertInputNotBeNull();
-        String[] elements = algorithmGeneralContext.getInput().split(",");
+        return splitter(algorithmGeneralContext.getInput(), t);
+    }
+
+    public static <T> ArrayList<T> splitter(String str, T t) throws ProcessorException {
+        String[] elements = str.split(",");
         if (elements.length == 0) {
             throw new ProcessorException("Context input has no element!");
         }
