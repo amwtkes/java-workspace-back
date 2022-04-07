@@ -13,9 +13,9 @@ import java.util.List;
 public class KseService extends DefaultProcessorService {
     private final List<KseProcessor> processorList;
 
-    public List<Integer> run(String path) {
+    public List<KseContext.KseResult> run(String path) {
         KseContext kseContext = new KseContext(path);
         DefaultProcessorResult<Object> objectDefaultProcessorResult = this.runProcessors(processorList, kseContext);
-        return (List<Integer>) objectDefaultProcessorResult.getResult();
+        return (List<KseContext.KseResult>) objectDefaultProcessorResult.getResult();
     }
 }

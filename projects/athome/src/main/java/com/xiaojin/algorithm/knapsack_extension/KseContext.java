@@ -37,4 +37,11 @@ public class KseContext extends AlgorithmGeneralContext {
         private int removeIndex;
         private int bagVolume;
     }
+
+    @AllArgsConstructor
+    @Getter
+    static class KseResult {
+        private int maxValue;
+        private List<Integer> selectedIndex = new ArrayList<>();
+    }
 }

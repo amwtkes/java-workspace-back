@@ -26,14 +26,14 @@ public class KseComputingProcessor implements KseProcessor {
         }
         int maxVolume = maxVolumeOpt.get().getVolume();
         //volume第一行不用i==0这行，为了方便
-        int[][] dpA = new int[items.size()][maxVolume + 1];//顺序的dp表，值为取0---i范围内的最大价值[第一个维度是0-i可选][bag的容积]
-        int[][] dpB = new int[items.size()][maxVolume + 1];//逆序的dp表，值为取0---i范围内的最大价值
+        int[][] dpA = new int[items.size()][maxVolume + 1];//顺序的dp表，值为取0---i范围内的最大价值[第一个维度是0-i可选][bag的容积]：（能去前i个值得情况下，背包容积为maxVolume情况下，的最大值）
+        int[][] dpB = new int[items.size()][maxVolume + 1];//逆序的dp表，值为取0---i范围内的最大价值（能去前i个值得情况下，背包容积为maxVolume情况下，的最大值）
         computeDp(items, dpA, maxVolume);
         computeDp(itemsReversed, dpB, maxVolume);
 
-        List<Integer> answers = new ArrayList<>(asks.size());
+        List<KseContext.KseResult> answers = new ArrayList<>(asks.size());
         for (int i = 0; i < asks.size(); i++) {
-            answers.add(computeAsk(items, dpA, dpB, asks.get(i)));
+            answers.add(computeAsk(items, itemsReversed, dpA, dpB, asks.get(i)));
         }
         kseContext.setResultAndFinish(answers);
     }
@@ -63,16 +63,25 @@ public class KseComputingProcessor implements KseProcessor {
      * @param ask 一次提问
      * @return 减少一个物品后最大的价值
      */
-    private Integer computeAsk(List<KseContext.Item> items, int[][] dpA, int[][] dpB, KseContext.Ask ask) {
+    private KseContext.KseResult computeAsk(List<KseContext.Item> items, List<KseContext.Item> reversedItems, int[][] dpA, int[][] dpB, KseContext.Ask ask) {
         int deleteIndex = ask.getRemoveIndex();
         int bagVolume = ask.getBagVolume();
         int maxInnerValue = 0;
+        //去除了第0个
         if (deleteIndex == 0) {
-            return dpB[items.size() - 2][bagVolume];
+            int maxValue = dpB[indexAToB(items.size(), 1)][bagVolume];
+            List<Integer> markList = markFunction(items, reversedItems, dpA, dpB, 1, bagVolume, false);
+            return new KseContext.KseResult(maxValue, indexToA(items.size(), markList, false));
         }
+
+        //去除了最后一个
         if (deleteIndex == items.size() - 1) {
-            return dpA[items.size() - 2][bagVolume];
+            int maxValue = dpA[items.size() - 2][bagVolume];
+            List<Integer> markList = markFunction(items, reversedItems, dpA, dpB, items.size() - 2, bagVolume, true);
+            return new KseContext.KseResult(maxValue, indexToA(items.size(), markList, true));
         }
+
+        //去除的是中间的元素
         int maxAIndex = deleteIndex - 1;
         /*
          * 注意B的索引是倒着的A的0就是B的size-1
@@ -80,13 +89,30 @@ public class KseComputingProcessor implements KseProcessor {
          * 最大的B索引还要-1
          */
         int maxBIndex = items.size() - deleteIndex - 1 - 1;
+        List<Integer> retInner = new ArrayList<>();
         for (int i = 1; i < bagVolume; i++) {
             int tempMax = dpA[maxAIndex][i] + dpB[maxBIndex][bagVolume - i];
             if (tempMax > maxInnerValue) {
+                List<Integer> aMarkIndexes = markFunction(items, reversedItems, dpA, dpB, maxAIndex, i, true);
+                List<Integer> bMarkIndexes = indexToA(items.size(), markFunction(items, reversedItems, dpA, dpB, maxBIndex, bagVolume - i, false), false);
+                retInner.clear();
+                retInner.addAll(aMarkIndexes);
+                retInner.addAll(bMarkIndexes);
                 maxInnerValue = tempMax;
             }
         }
-        return Math.max(dpA[maxAIndex][bagVolume], Math.max(dpB[maxBIndex][bagVolume], maxInnerValue));
+
+        //合并结果
+        int a = dpA[maxAIndex][bagVolume];
+        int b = dpB[maxBIndex][bagVolume];
+        int totalMaxValue = Math.max(a, Math.max(b, maxInnerValue));
+        if (a == totalMaxValue) {
+            return new KseContext.KseResult(totalMaxValue, markFunction(items, reversedItems, dpA, dpB, maxAIndex, bagVolume, true));
+        }
+        if (b == totalMaxValue) {
+            return new KseContext.KseResult(totalMaxValue, markFunction(items, reversedItems, dpA, dpB, maxBIndex, bagVolume, false));
+        }
+        return new KseContext.KseResult(totalMaxValue, retInner);
     }
 
     /***
@@ -115,6 +141,67 @@ public class KseComputingProcessor implements KseProcessor {
                 dp[i][volume] = dp[i - 1][volume];
             }
         }
+    }
+
+    private List<Integer> markFunction(List<KseContext.Item> items, List<KseContext.Item> reversedItems, int[][] dpA, int[][] dpB, int indexOfA, int volume, boolean flag) {
+        List<Integer> ret = new ArrayList<>();
+        int index = flag ? indexOfA : items.size() - indexOfA - 1;//转换到B的index
+        //逆序的
+        int[][] dp = flag ? dpA : dpB;
+        while (volume > 0 && index >= 0) {
+            int volI = flag ? items.get(index).getVolume() : reversedItems.get(index).getVolume();
+            int valueI = flag ? items.get(index).getValue() : reversedItems.get(index).getValue();
+            if (index == 0) {
+                if (dp[0][volume] > 0) {
+                    ret.add(0);
+                }
+                return ret;
+            }
+            //不能选i因为i的体积比bag容积大
+            if (volI > volume) {
+                index--;
+                continue;
+            }
+            //当第index个物品的容量等于背包的容积，那么如果放入这个
+            if (volI == volume) {
+                if (valueI >= dp[index - 1][volume]) {
+                    ret.add(index);
+                    return ret;
+                } else {
+                    index--;
+                    continue;
+                }
+            }
+
+            //volI<volume 可以容纳index这个物品
+            int a = dp[index - 1][volume - volI] + valueI; //加入index的情况
+            int b = dp[index - 1][volume]; //不加入index的情况
+            if (a > b) {
+                ret.add(index);
+                volume -= volI;
+            }
+            index--;
+        }
+        return ret;
+    }
+
+    private int indexAToB(int sizeOfItems, int indexOfA) {
+        return sizeOfItems - indexOfA - 1;
+    }
+
+    private int indexBToA(int sizeOfItems, int indexOfB) {
+        return sizeOfItems - indexOfB - 1;
+    }
+
+    private List<Integer> indexToA(int sizeOfItems, List<Integer> resultList, boolean flag) {
+        if (flag) {
+            return resultList;
+        }
+        List<Integer> ret = new ArrayList<>();
+        for (Integer reversedIndex : resultList) {
+            ret.add(indexBToA(sizeOfItems, reversedIndex));
+        }
+        return ret;
     }
 
     @Override
