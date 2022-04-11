@@ -10,6 +10,7 @@ import runtime.processor.defaultprocessor.DefaultProcessorContext;
 public class AlgorithmGeneralContext extends DefaultProcessorContext<Object> {
     private String input;
     private String inputDataPath;
+    private int switcher; //用于切换不同的执行历程
 
     public AlgorithmGeneralContext() {
         super();
