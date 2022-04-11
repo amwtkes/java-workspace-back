@@ -17,6 +17,7 @@ public class ZdyComputationProcessor implements ZdyProcessor {
     @Override
     public void process(ZdyContext zdyContext) throws ProcessorException {
         if (zdyContext.getSwitcher() != COMPUTATION) {
+            System.out.println("使用了蛮力计算");
             return;
         }
         List<Integer> items = zdyContext.getItems();
@@ -25,39 +26,45 @@ public class ZdyComputationProcessor implements ZdyProcessor {
             maxValue |= item;
         }
         int[] array = new int[32]; //位数为index的位数次数和
-        for (int i = 0; i < items.size(); i++) {
-            array[i] = 0;
-        }
         int leftIndex = 0, rightIndex = 0, minLength = Integer.MAX_VALUE, tempMaxValue = 0;
-        for (int i = 0; i < items.size(); i++) {
-            rightIndex = i;
-            Integer item = items.get(i);
-            tempMaxValue |= item;
-            addItemToArray(array, item);
-            /*
-             * 顺着来遇到了等于maxValue的index
-             * 如果遇到maxValue
-             * 1、删除最左边起始位置的元素，i -> j  => i+1 -> j
-             * 2、看看删除后的 i+1 -> j是否还等于maxValue
-             * 3、如果等于，则继续删除，
-             * 4、如果不等于，则停止，然后更新如果得到长度更短的解，就更新left与right index
-             */
-
+        for (int l = 0, r = 0; r < items.size(); ) {
+            int iValue = items.get(r);
+            tempMaxValue |= iValue;
+            addItemToArray(array, iValue);
             if (tempMaxValue == maxValue) {
-                for (int j = leftIndex; j <= i; j++) {
-                    int tempItem = items.get(j);
-                    if (deleteItemFromArray(array, tempItem) == maxValue) {
-                        continue;
-                    }
-                    addItemToArray(array, tempItem);//删除最后不相等的那个item要重新加回来。
-                    leftIndex = j;
-                    break;
-                }
-                int tempLength = rightIndex - leftIndex + 1;
+                int tempLength = r - l + 1;
                 if (tempLength < minLength) {
+                    leftIndex = l;
+                    rightIndex = r;
                     minLength = tempLength;
                 }
+
+                int lValue = items.get(l);
+                tempMaxValue = deleteItemFromArray(array, lValue);
+                /**
+                 * l ==r时，那么肯定就出现了单个元素达到最大的情况。要更新下left与right index。
+                 * 而且l还可以指向下一个不满足的位置
+                 */
+                while (tempMaxValue == maxValue) {//
+                    l++;
+                    lValue = items.get(l);
+                    tempMaxValue = deleteItemFromArray(array, lValue);
+                }
+
+                //此时l指向了去掉这个元素就不等于maxValue的点
+                //也就是满足条件的起始位置
+                tempLength = r - l + 1;
+                if (tempLength < minLength) {
+                    leftIndex = l;
+                    rightIndex = r;
+                    minLength = tempLength;
+                }
+                //让它指向第一个不满足的点，因为下面要开始计算了。
+                //tempMaxValue也进行了更新了。
+                //此时l++ 就跟deleteItemFromArray的效果对上了。
+                l++;//
             }
+            r++; //正常遍历，还没有达到maxValue时，每次+1
         }
 
         List<Integer> ret = items.subList(leftIndex, rightIndex + 1);

@@ -17,6 +17,7 @@ public class ZdyManliProcessor implements ZdyProcessor {
     @Override
     public void process(ZdyContext zdyContext) throws ProcessorException {
         if (zdyContext.getSwitcher() != COMPUTATION_MANLI) {
+            System.out.println("使用了巧妙解");
             return;
         }
 
