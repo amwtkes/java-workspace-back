@@ -26,6 +26,10 @@ public class AlgorithmGeneralContext extends DefaultProcessorContext<Object> {
         finish(result);
     }
 
+    public void setResultNotFinish(Object result) {
+        this.getProcessorResult().setResult(result);
+    }
+
     public Object getResult() {
         return this.getProcessorResult().getResult();
     }
