@@ -1,7 +1,7 @@
 package com.xiaojin.athome.controllers;
 
 import com.xiaojin.algorithm.AlgorithmRunner;
-import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.MaxSequencingContext;
+import com.xiaojin.algorithm.dps.maxsequencingsublistsum.processors.base.MaxSequencingContext;
 import com.xiaojin.algorithm.p_recursive.base.ClimbStairsContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,10 +2,10 @@ package com.xiaojin.algorithm;
 
 import com.xiaojin.algorithm.base.AlgorithmGeneralContext;
 import com.xiaojin.algorithm.base.AlgorithmGeneralProcessor;
-import com.xiaojin.algorithm.knapsack.base.KnapsackContext;
-import com.xiaojin.algorithm.knapsack.base.KnapsackProcessor;
-import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.MaxSequencingContext;
-import com.xiaojin.algorithm.maxsequencingsublistsum.processors.base.MaxSequencingProcessor;
+import com.xiaojin.algorithm.dps.knapsack.base.KnapsackContext;
+import com.xiaojin.algorithm.dps.knapsack.base.KnapsackProcessor;
+import com.xiaojin.algorithm.dps.maxsequencingsublistsum.processors.base.MaxSequencingContext;
+import com.xiaojin.algorithm.dps.maxsequencingsublistsum.processors.base.MaxSequencingProcessor;
 import com.xiaojin.algorithm.p_recursive.base.ClimbStairsContext;
 import com.xiaojin.algorithm.p_recursive.base.ClimbStairsProcessor;
 import org.springframework.stereotype.Service;
