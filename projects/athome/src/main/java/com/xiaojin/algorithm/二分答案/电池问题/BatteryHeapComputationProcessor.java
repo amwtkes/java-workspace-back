@@ -32,7 +32,7 @@ public class BatteryHeapComputationProcessor implements BatteryProcessor {
             for (int i = 0; i < cars.length; i++) {
                 Integer topValue = maxTopHeap.remove();
                 if (topValue <= 0) {
-                    batteryContext.setResultAndFinish(ret);
+                    batteryContext.setResultNotFinish(ret);
                     return;
                 }
                 cars[i] = topValue;

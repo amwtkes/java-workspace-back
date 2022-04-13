@@ -24,4 +24,22 @@ class BatteryServiceTest {
         run = batteryService.run("battery/1.txt", BINARY_COMPUTATION);
         Assertions.assertEquals(18, run);
     }
+
+    @Test
+    public void test2() {
+        int run = batteryService.run("battery/2.txt", HEAP_COMPUTATION);
+        Assertions.assertEquals(72, run);
+
+        run = batteryService.run("battery/2.txt", BINARY_COMPUTATION);
+        Assertions.assertEquals(72, run);
+    }
+
+    @Test
+    public void test3() {
+        int run = batteryService.run("battery/3.txt", HEAP_COMPUTATION);
+        Assertions.assertEquals(4, run);
+
+        run = batteryService.run("battery/3.txt", BINARY_COMPUTATION);
+        Assertions.assertEquals(4, run);
+    }
 }
