@@ -162,7 +162,7 @@ public class SegmentTree {
         }
     }
 
-    public static int[] genarateRandomArray(int len, int max) {
+    public static int[] generateRandomArray(int len, int max) {
         int size = (int) (Math.random() * len) + 1;
         int[] origin = new int[size];
         for (int i = 0; i < size; i++) {
@@ -178,7 +178,7 @@ public class SegmentTree {
         int addOrUpdateTimes = 1000;
         int queryTimes = 500;
         for (int i = 0; i < testTimes; i++) {
-            int[] origin = genarateRandomArray(len, max);
+            int[] origin = generateRandomArray(len, max);
             SegmentTree seg = new SegmentTree(origin);
             int S = 1;
             int N = origin.length;
