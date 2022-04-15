@@ -43,6 +43,8 @@ public class ContextHelper {
                 ret.add((T) new BigDecimal(e));
             } else if (t instanceof Double) {
                 ret.add((T) Double.valueOf(e));
+            } else if (t instanceof String) {
+                ret.add((T) e);
             } else {
                 throw new ProcessorException("Type not supported by Splitter!");
             }
