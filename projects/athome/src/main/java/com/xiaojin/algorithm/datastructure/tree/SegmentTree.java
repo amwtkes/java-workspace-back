@@ -11,7 +11,7 @@ public class SegmentTree {
     private int[] sum;
     private int[] lazy;
     private int[] change;
-    private boolean[] update;
+    private boolean[] update; //为什么要多这么个数组？因为更新跟累加不同，更新不能用0或者-1来表示某个范围没有更新，因为更新的值可能就是。所以多一个boolean数组。
 
     public SegmentTree(int[] origin) {
         MAXN = origin.length + 1;
@@ -36,6 +36,9 @@ public class SegmentTree {
     //这里为什么update的判断是在前？因为update为true，说明已经命中相等或者包含，而且
     //lazy会被设置为0，而如果lazy如果不等于0，说明update的操作要早于add。所以先做update在做add的判断。合理。
     private void pushDown(int rt, int ln, int rn) {
+        /*
+         * 更新的是sum数组，update与change数组更新的是上次更改的缓存。
+         */
         if (update[rt]) {
             update[rt << 1] = true;
             update[rt << 1 | 1] = true;
