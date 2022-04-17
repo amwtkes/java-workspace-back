@@ -83,6 +83,7 @@ public class SegmentTree {
         }
         // 当前任务躲不掉，无法懒更新，要往下发
         int mid = (l + r) >> 1;
+        //为什么要下推缓存？因为注意rt的含义，rt这个索引代表的范围被遍历了，也就是说目标范围[L,R]在这个rt为索引的范围内，表示要更新这个范围[l,r].
         pushDown(rt, mid - l + 1, r - mid);
         if (L <= mid) {
             update(L, R, C, l, mid, rt << 1);
