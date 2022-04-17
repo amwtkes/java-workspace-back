@@ -22,6 +22,28 @@ public class App {
         }
     }
 
+    public static int breakDown(int l, int r, int[] arry, int[] sum, int index) {
+        if (l > r) {
+            return 0;
+        }
+        if (l == r) {
+//            String value = getString(l, r, index, arry[l]);
+            sum[index] = arry[l];
+            return arry[l];
+        }
+        int mid = l + (r - l) / 2;
+        int left = breakDown(l, mid, arry, sum, index << 1);
+        int right = breakDown(mid + 1, r, arry, sum, index << 1 | 1);
+        //        arryRet[index] = getString(l, r, index, total);
+        int total = left + right;
+        sum[index] = total;
+        return total;
+    }
+
+    private static String getString(int l, int r, int index, int total) {
+        return "index=" + index + "-[" + l + "-" + r + "]=" + total;
+    }
+
     public static int makeRandom(int min, int max) {
 //        System.out.println("Random value of type int between " + min + " to " + max + ":");
         int intValue = (int) (Math.random() * (max - min + 1) + min);
