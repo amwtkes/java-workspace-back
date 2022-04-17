@@ -32,6 +32,9 @@ public class SegmentTree {
     // 之前的，所有懒增加，和懒更新，从父范围，发给左右两个子范围
     // 分发策略是什么
     // ln表示左子树元素结点个数，rn表示右子树结点个数
+
+    //这里为什么update的判断是在前？因为update为true，说明已经命中相等或者包含，而且
+    //lazy会被设置为0，而如果lazy如果不等于0，说明update的操作要早于add。所以先做update在做add的判断。合理。
     private void pushDown(int rt, int ln, int rn) {
         if (update[rt]) {
             update[rt << 1] = true;
