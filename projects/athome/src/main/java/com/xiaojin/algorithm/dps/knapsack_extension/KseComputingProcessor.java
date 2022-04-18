@@ -44,6 +44,7 @@ public class KseComputingProcessor implements KseProcessor {
      * a1 a2 a3 a4 a5(delete) a6 a7 a8
      * 相当于将一个数组分成了两个部分A={a1,a2,a3,a4} B={a6,a7,a8}
      * 那么最大的价值应该等于=max{dpA[4,w],dpB[3,w],dpA[4,w-i]+dpB[3,i]} //DpA与DpB分别是正序与逆序的dp二维表格。
+     * i相当于A部分消耗了i个重量，还剩下w-i给B部分去消耗。
      * 类似于分治算法的归并的部分，这部分的时间复杂度为O(n)
      * 情况1：最大值在前半部分 dpA[4,w] -- w为背包容量，4表示可取的item下标范围
      * 情况2：最大值在后半部分 dpB[3,w] -- B因为是逆序，所以它的前3 item就是A的后3个item
