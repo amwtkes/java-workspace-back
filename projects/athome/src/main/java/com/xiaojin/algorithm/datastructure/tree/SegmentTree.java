@@ -45,6 +45,15 @@ public class SegmentTree {
      * 2.add(3,77,5)在[3,77]范围每个元素再加个5。接到这个调用以后，[1,100]范围的元素有一部分需要更新，有一部分不需要。所以，lazyAdd[1]=4就不对了，也就是失效了
      * 所以需要下推。
      */
+
+    /**
+     * 可以根据{@link 线段树.md}文件的图可以看出
+     *
+     * add,update,query都是相同的递归形式
+     * 1. 是要是覆盖不全就下推缓存到下一层
+     * 2. 如果是全包就可以计算返回
+     * 3. 递归求解
+     */
     private void pushDown(int rt, int ln, int rn) {
         /*
          * 更新的是sum数组，update与change数组更新的是上次更改的缓存。
