@@ -9,9 +9,9 @@ public class SegmentTree {
     private int MAXN;
     private int[] arr;
     private int[] sum;
-    private int[] lazy;
-    private int[] change;
-    private boolean[] update; //为什么要多这么个数组？因为更新跟累加不同，更新不能用0或者-1来表示某个范围没有更新，因为更新的值可能就是。所以多一个boolean数组。
+    private int[] lazyAdd;
+    private int[] lazyUpdate;
+    private boolean[] isUpdated; //为什么要多这么个数组？因为更新跟累加不同，更新不能用0或者-1来表示某个范围没有更新，因为更新的值可能就是。所以多一个boolean数组。
 
     public SegmentTree(int[] origin) {
         MAXN = origin.length + 1;
@@ -19,10 +19,10 @@ public class SegmentTree {
         for (int i = 1; i < MAXN; i++) {
             arr[i] = origin[i - 1];
         }
-        sum = new int[MAXN << 2]; // 用来支持脑补概念中，某一个范围的累加和信息
-        lazy = new int[MAXN << 2]; // 用来支持脑补概念中，某一个范围沒有往下傳遞的纍加任務
-        change = new int[MAXN << 2]; // 用来支持脑补概念中，某一个范围有没有更新操作的任务
-        update = new boolean[MAXN << 2]; // 用来支持脑补概念中，某一个范围更新任务，更新成了什么
+        sum = new int[MAXN << 2]; // 某一个范围的累加和信息
+        lazyAdd = new int[MAXN << 2]; // 某一个范围有没有往下传播的累加值
+        isUpdated = new boolean[MAXN << 2]; // 某一个范围有没有更新操作的任务
+        lazyUpdate = new int[MAXN << 2]; // 某一个范围更新任务，更新成了什么
     }
 
     private void pushUp(int rt) {
@@ -33,33 +33,43 @@ public class SegmentTree {
     // 分发策略是什么
     // ln表示左子树元素结点个数，rn表示右子树结点个数
 
-    //这里为什么update的判断是在前？因为update为true，说明已经命中相等或者包含，而且
+    //因为update为true，说明已经命中相等或者包含，而且
     //lazy会被设置为0，而如果lazy如果不等于0，说明update的操作要早于add。所以先做update在做add的判断。合理。
+    /*
+     * 这里为什么update的判断是在前？
+     * 因为，如果rt为索引的元素是sum这个线段树的一个父节点，进入这个函数说明rt这个元素代表的arr范围需要下推。也就是原来已经需要更新而没有，而被延迟更新的范围
+     * 如果再次需要更新，则需要下推1层。为什么是下推1层？
+     * 每个节点，只能缓存一个更新信息，如果再来一个，就要下推以便存储新的。
+     * 1.add(1,100,4) 对一个范围[1,100]的所有元素+4.
+     * 如果arr正好100个元素，则[1,100]是根节点。那么lazyAdd[1]=4.
+     * 2.add(3,77,5)在[3,77]范围每个元素再加个5。接到这个调用以后，[1,100]范围的元素有一部分需要更新，有一部分不需要。所以，lazyAdd[1]=4就不对了，也就是失效了
+     * 所以需要下推。
+     */
     private void pushDown(int rt, int ln, int rn) {
         /*
          * 更新的是sum数组，update与change数组更新的是上次更改的缓存。
          */
-        if (update[rt]) {
-            update[rt << 1] = true;
-            update[rt << 1 | 1] = true;
-            change[rt << 1] = change[rt];
-            change[rt << 1 | 1] = change[rt];
-            lazy[rt << 1] = 0;
-            lazy[rt << 1 | 1] = 0;
-            sum[rt << 1] = change[rt] * ln;
-            sum[rt << 1 | 1] = change[rt] * rn;
-            update[rt] = false;
+        if (isUpdated[rt]) {
+            isUpdated[rt << 1] = true;
+            isUpdated[rt << 1 | 1] = true;
+            lazyUpdate[rt << 1] = lazyUpdate[rt];
+            lazyUpdate[rt << 1 | 1] = lazyUpdate[rt];
+            lazyAdd[rt << 1] = 0;
+            lazyAdd[rt << 1 | 1] = 0;
+            sum[rt << 1] = lazyUpdate[rt] * ln;
+            sum[rt << 1 | 1] = lazyUpdate[rt] * rn;
+            isUpdated[rt] = false;
         }
-        if (lazy[rt] != 0) {
-            lazy[rt << 1] += lazy[rt];
-            sum[rt << 1] += lazy[rt] * ln;
-            lazy[rt << 1 | 1] += lazy[rt];
-            sum[rt << 1 | 1] += lazy[rt] * rn;
-            lazy[rt] = 0;
+        if (lazyAdd[rt] != 0) {
+            lazyAdd[rt << 1] += lazyAdd[rt];
+            sum[rt << 1] += lazyAdd[rt] * ln;
+            lazyAdd[rt << 1 | 1] += lazyAdd[rt];
+            sum[rt << 1 | 1] += lazyAdd[rt] * rn;
+            lazyAdd[rt] = 0;
         }
     }
 
-    // 在初始化阶段，先把sum数组，填好
+    // 在初始化阶段，先把sum数组，填好——sum数组就是线段树
     // 在arr[l~r]范围上，去build，1~N，
     // rt : 这个范围在sum中的下标
     public void build(int l, int r, int rt) {
@@ -78,10 +88,10 @@ public class SegmentTree {
     // l~r  rt
     public void update(int L, int R, int C, int l, int r, int rt) {
         if (L <= l && r <= R) {
-            update[rt] = true;
-            change[rt] = C;
+            isUpdated[rt] = true;
+            lazyUpdate[rt] = C;
             sum[rt] = C * (r - l + 1);
-            lazy[rt] = 0;
+            lazyAdd[rt] = 0;
             return;
         }
         // 当前任务躲不掉，无法懒更新，要往下发
@@ -103,7 +113,7 @@ public class SegmentTree {
         // 任务如果把此时的范围全包了！
         if (L <= l && r <= R) {
             sum[rt] += C * (r - l + 1);
-            lazy[rt] += C;
+            lazyAdd[rt] += C;
             return;
         }
         // 任务没有把你全包！
