@@ -53,7 +53,7 @@ public class App {
         System.out.println(anoContext.getBean("&getMyObjectFactoryBean"));
 
         //application context aware接口
-        System.out.println(myPet.getApplicationContext());
-        System.out.println(myPet.getEnvironment());
+//        System.out.println(myPet.getApplicationContext());
+//        System.out.println(myPet.getEnvironment());
     }
 }
