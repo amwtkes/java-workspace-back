@@ -31,18 +31,19 @@ public class PresentNaiveProcessor implements PresentProcessor {
 
         computeChosen(sortedItems, k, 0, sortedItems.size() - 1, chosen, combination);
         for (List<Integer> indexCombinationList : combination) {
-            int maxTem = -1;
+            int minTemp = Integer.MAX_VALUE;
 
             //三个数比两次就行了
+            //求最小取值中，最大的组合
             for (int i = 0; i < indexCombinationList.size() - 1; ) {
                 Integer first = sortedItems.get(indexCombinationList.get(i));
                 Integer next = sortedItems.get(indexCombinationList.get(++i));
-                if (maxTem < next - first) {
-                    maxTem = next - first;
+                if (minTemp > next - first) {
+                    minTemp = next - first;
                 }
             }
-            if (maxTem > maxValue) {
-                maxValue = maxTem;
+            if (minTemp > maxValue) {
+                maxValue = minTemp;
                 ret = indexCombinationList;
             }
         }
@@ -58,7 +59,7 @@ public class PresentNaiveProcessor implements PresentProcessor {
             }
             return;
         }
-        for (int i = begin; i < end; i++) {
+        for (int i = begin; i <= end; i++) {
             ArrayList<Integer> tmp = new ArrayList<>(chosen);
             tmp.add(i);
             combination.add(new ArrayList<>(tmp));
