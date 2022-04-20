@@ -20,9 +20,9 @@ public class App {
         System.out.println(myCat.getAge());
         System.out.println(myCat.getNickName());
 
-        Person person = (Person) context.getBean("myPerson");
-        System.out.println(person.getAge());
-        System.out.println(person.getName());
+//        Person person = (Person) context.getBean("myPerson");
+//        System.out.println(person.getAge());
+//        System.out.println(person.getName());
 
         /**
          * exception thrown
@@ -35,7 +35,7 @@ public class App {
 //        Person person2 = (Person) context2.getBean("myPerson");
 //        System.out.println(person2.getAge());
 //        System.out.println(person2.getName());
-        AnnotationConfigApplicationContext annotationConfigApplicationContext = new AnnotationConfigApplicationContext("com.objects");
+        AnnotationConfigApplicationContext annotationConfigApplicationContext = new AnnotationConfigApplicationContext("com.xiaojin.athome.myspring.objects");
         Pet myPet = (Pet) annotationConfigApplicationContext.getBean("myPet");
         Pet myPet2 = (Pet) annotationConfigApplicationContext.getBean("myPet");
         if (myPet == myPet2) {
