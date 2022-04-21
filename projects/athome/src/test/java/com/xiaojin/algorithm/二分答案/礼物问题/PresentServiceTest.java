@@ -28,4 +28,17 @@ class PresentServiceTest {
 
         Assertions.assertEquals(run, run2);
     }
+
+    @Test
+    public void test2() {
+        PresentContext.PresentResult run = presentService.run("present/2.txt", NAIVE, 3);
+        System.out.println(run.getNr());
+        System.out.println(run.getIndexes());
+
+        PresentContext.PresentResult run2 = presentService.run("present/2.txt", COMPUTATION, 3);
+        System.out.println(run2.getNr());
+        System.out.println(run2.getIndexes());
+
+        Assertions.assertEquals(run, run2);
+    }
 }
