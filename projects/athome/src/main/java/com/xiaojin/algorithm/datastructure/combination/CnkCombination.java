@@ -11,12 +11,13 @@ import java.util.Stack;
 public class CnkCombination {
     /**
      * 返回的是index组合
+     *
      * @param n 最大元素的index
      * @param k 多少个
      * @return index数组
      */
     public List<List<Integer>> generate(int n, int k) {
-        if (n < k) {
+        if (n + 1 < k) {
             throw new IllegalArgumentException("n<k! k:" + k + " n:" + n);
         }
         Stack<Integer> chosen = new Stack<>();

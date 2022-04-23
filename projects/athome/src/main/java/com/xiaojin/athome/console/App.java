@@ -25,7 +25,7 @@ public class App {
 //            }
 //        }
 
-        List<List<Integer>> generate = new CnkCombination().generate(5-1, 2);
+        List<List<Integer>> generate = new CnkCombination().generate(5-1, 5);
         for(List<Integer> c : generate){
             System.out.println(c);
         }
