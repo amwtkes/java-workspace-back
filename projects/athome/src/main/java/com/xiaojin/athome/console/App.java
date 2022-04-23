@@ -1,6 +1,10 @@
 package com.xiaojin.athome.console;
 
+import com.xiaojin.algorithm.datastructure.combination.CnkCombination;
+
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class App {
     public static void main(String[] args) {
@@ -9,16 +13,21 @@ public class App {
 //        heap.addAll(integers);
 //        System.out.println(heap.remove());
 //        System.out.println(heap.poll());
-        int l = 1, r = 100, length = r * 4;
-        int[] arryInt = new int[r + 1];
-        Arrays.fill(arryInt, 1);
-        int[] sum = new int[length];
-        Arrays.fill(sum, 0);
-        breakDown(l, r, arryInt, sum, 1);
-        for (int i = 1; i < sum.length; i++) {
-            if (sum[i] > 0) {
-                System.out.println(sum[i]);
-            }
+//        int l = 1, r = 100, length = r * 4;
+//        int[] arryInt = new int[r + 1];
+//        Arrays.fill(arryInt, 1);
+//        int[] sum = new int[length];
+//        Arrays.fill(sum, 0);
+//        breakDown(l, r, arryInt, sum, 1);
+//        for (int i = 1; i < sum.length; i++) {
+//            if (sum[i] > 0) {
+//                System.out.println(sum[i]);
+//            }
+//        }
+
+        List<List<Integer>> generate = new CnkCombination().generate(5-1, 2);
+        for(List<Integer> c : generate){
+            System.out.println(c);
         }
     }
 
