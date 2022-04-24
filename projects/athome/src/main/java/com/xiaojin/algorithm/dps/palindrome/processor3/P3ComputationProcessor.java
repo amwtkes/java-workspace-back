@@ -27,9 +27,12 @@ public class P3ComputationProcessor implements P3Processor {
         }
         int maxLength = 0, maxLeftIndex = 0, maxRightIndex = 0;
         /**
+         * dp[i][j]表示是否i到j是回文= true or false
+         *
          * dp[i][j]= dp[i+1][j-1] && a[i]==a[j]
-         * 1 所以i应该从大到小计算
-         * 2 j应该从小到大计算
+         *
+         * 1 所以i应该从大到小计算(因为下一项比前一项大，所以要反着遍历才能命中缓存，先算大的，再算小的)
+         * 2 j应该从小到大计算（因为递归的下一项比前一项要小。由y->y-1）
          * 3 i<j 否则无效 （所以j初始化的时候应该=i）
          */
         for (int i = sourceStr.length() - 1; i >= 0; i--) {
