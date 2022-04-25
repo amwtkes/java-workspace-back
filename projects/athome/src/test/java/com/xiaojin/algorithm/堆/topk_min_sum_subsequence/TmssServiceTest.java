@@ -12,7 +12,7 @@ import java.util.List;
 import static com.xiaojin.algorithm.堆.topk_min_sum_subsequence.TmssPriority.NAIVE;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {TmssService.class, TmssLoadProcessor.class, TmssNaiveProcessor.class})
+@SpringBootTest(classes = {TmssService.class, TmssLoadProcessor.class, TmssNaiveProcessor.class, TmssComputationProcessor.class})
 class TmssServiceTest {
     @Autowired
     private TmssService tmssService;
