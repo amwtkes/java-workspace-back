@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ContextHelper {
@@ -115,5 +116,28 @@ public class ContextHelper {
                 reader.close();
             }
         }
+    }
+
+    private static int[] randomArray(int len, int value) {
+        int[] arr = new int[len];
+        for (int i = 0; i < len; i++) {
+            arr[i] = (int) (Math.random() * value);
+        }
+        return arr;
+    }
+
+    public static int[] genRandomIntArray(int length, int maxValue, boolean needNegatives) {
+        int[] ints = randomArray(length, maxValue);
+        int delta = needNegatives ? (int) (Math.random() * maxValue) : 0;
+        return Arrays.stream(ints).map(v -> v - delta).toArray();
+    }
+
+    public static String intArrayToString(int[] array) {
+        String s = Arrays.stream(array).mapToObj(v -> v + ",").reduce((a, b) -> a + b).orElse("");
+        return s.substring(0, s.length() - 1);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(intArrayToString(genRandomIntArray(10, 50, false)));
     }
 }
