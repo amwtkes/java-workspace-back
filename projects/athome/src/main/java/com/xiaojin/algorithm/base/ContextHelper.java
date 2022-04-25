@@ -126,8 +126,21 @@ public class ContextHelper {
         return arr;
     }
 
+    public static ArrayList<Integer> toList(int[] array) {
+        ArrayList<Integer> ret = new ArrayList<>(array.length);
+        for (int j : array) {
+            ret.add(j);
+        }
+        return ret;
+    }
+
     public static String intArrayToString(int[] array) {
         String s = Arrays.stream(array).mapToObj(v -> v + ",").reduce((a, b) -> a + b).orElse("");
+        return s.substring(0, s.length() - 1);
+    }
+
+    public static String intArrayToString(List<Integer> array) {
+        String s = array.stream().map(v -> v + ",").reduce((a, b) -> a + b).orElse("");
         return s.substring(0, s.length() - 1);
     }
 
