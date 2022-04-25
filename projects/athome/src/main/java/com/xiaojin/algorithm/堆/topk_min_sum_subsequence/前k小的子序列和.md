@@ -11,4 +11,5 @@
 - 二叉树的结构也是有指数特性的
 - 二叉树可以穷举所有的组合
 - 排序的数组+分裂算法（下图） = 一个小顶堆
+- [马士兵教育视频](https://www.mashibing.com/study?courseNo=1052&sectionNo=56315&systemId=21)
 ![result](result.png)
