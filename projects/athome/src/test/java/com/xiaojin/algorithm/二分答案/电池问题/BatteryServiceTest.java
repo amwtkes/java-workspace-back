@@ -49,14 +49,17 @@ class BatteryServiceTest {
 
     @Test
     public void test4() {
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 1000; i++) {
             List<Integer> batteries = ContextHelper.toList(ContextHelper.randomArray(20, 50, false));
-            int nrCar = ContextHelper.randomInt(10, false);
+            int nrCar = ContextHelper.randomInt(1, 10, false);
+
+            System.out.println(batteries);
+            System.out.println(nrCar);
+
             int runHeap = batteryService.run(batteries, nrCar, HEAP_COMPUTATION);
 
             int runBinary = batteryService.run(batteries, nrCar, BINARY_COMPUTATION);
-            System.out.println(batteries);
-            System.out.println(nrCar);
+
             Assertions.assertEquals(runHeap, runBinary);
         }
     }

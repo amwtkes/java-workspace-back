@@ -149,6 +149,15 @@ public class ContextHelper {
         return (int) (Math.random() * maxValue) - delta;
     }
 
+    public static int randomInt(int minValue, int maxValue, boolean needNegatives) {
+        int delta = needNegatives ? (int) (Math.random() * maxValue) : 0;
+        int i = (int) (Math.random() * maxValue);
+        while (i < minValue) {
+            i = (int) (Math.random() * maxValue);
+        }
+        return i - delta;
+    }
+
     public static void main(String[] args) {
         System.out.println(intArrayToString(randomArray(10, 50, true)));
     }
