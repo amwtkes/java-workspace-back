@@ -30,7 +30,7 @@ public class PresentComputationProcessor implements PresentProcessor {
             answerList[i] = i + 1;
         }
         int leftIndex = 0;
-        int rightIndex = maxRange - 1;
+        int rightIndex = maxRange;
         int maxValue = -1;
         List<Integer> ret = new ArrayList<>();
         while (leftIndex <= rightIndex) {
