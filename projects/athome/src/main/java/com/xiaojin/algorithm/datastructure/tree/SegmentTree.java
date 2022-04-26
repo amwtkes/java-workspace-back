@@ -7,8 +7,8 @@ public class SegmentTree {
     // change[]为更新的值
     // update[]为更新慵懒标记
     private int MAXN;
-    private int[] arr;
-    private int[] sum;
+    private int[] arr; //原始数组
+    private int[] sum; //线段树数组
     private int[] lazyAdd;
     private int[] lazyUpdate;
     private boolean[] isUpdated; //为什么要多这么个数组？因为更新跟累加不同，更新不能用0或者-1来表示某个范围没有更新，因为更新的值可能就是。所以多一个boolean数组。
@@ -19,7 +19,7 @@ public class SegmentTree {
         for (int i = 1; i < MAXN; i++) {
             arr[i] = origin[i - 1];
         }
-        sum = new int[MAXN << 2]; // 某一个范围的累加和信息
+        sum = new int[MAXN << 2]; // 某一个范围的累加和信息 . 4N足够存储了。因为是个完全二叉树.
         lazyAdd = new int[MAXN << 2]; // 某一个范围有没有往下传播的累加值
         isUpdated = new boolean[MAXN << 2]; // 某一个范围有没有更新操作的任务
         lazyUpdate = new int[MAXN << 2]; // 某一个范围更新任务，更新成了什么
