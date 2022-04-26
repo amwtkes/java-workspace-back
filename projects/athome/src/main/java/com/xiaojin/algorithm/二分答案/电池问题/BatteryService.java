@@ -19,4 +19,13 @@ public class BatteryService extends DefaultProcessorService {
         DefaultProcessorResult<Object> objectDefaultProcessorResult = this.runProcessors(processorList, batteryContext);
         return (int) objectDefaultProcessorResult.getResult();
     }
+
+    public int run(List<Integer> items, int nrCar, int switcher) {
+        BatteryContext batteryContext = new BatteryContext(null);
+        batteryContext.setSwitcher(switcher);
+        batteryContext.setBatteries(items);
+        batteryContext.setCarsNr(nrCar);
+        DefaultProcessorResult<Object> objectDefaultProcessorResult = this.runProcessors(processorList, batteryContext);
+        return (int) objectDefaultProcessorResult.getResult();
+    }
 }

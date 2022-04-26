@@ -23,6 +23,9 @@ public class BatteryLoadProcessor implements BatteryProcessor {
 
     @Override
     public void process(BatteryContext batteryContext) throws ProcessorException {
+        if (batteryContext.getBatteries() != null && batteryContext.getBatteries().size() > 0) {
+            return;
+        }
         try {
             List<String> inputStrings = getInputStringListFromClassPathFile(resourceLoader, batteryContext.getInputDataPath());
             if (inputStrings.size() <= 0) {

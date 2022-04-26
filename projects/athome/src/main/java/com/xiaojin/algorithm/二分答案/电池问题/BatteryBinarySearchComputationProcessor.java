@@ -39,10 +39,10 @@ public class BatteryBinarySearchComputationProcessor implements BatteryProcessor
         //二分搜索这个最大的值 在batteries范围内，carNr个车最大能撑多少分钟。
         int topRangeOfBattery = sum[size - 1];
         int leftValue = 1;
-        int rightValue = topRangeOfBattery - 1;
+        int rightValue = topRangeOfBattery;
         int midValue = leftValue + (rightValue - leftValue) / 2;
         int result = -1;
-        while (leftValue < rightValue) {
+        while (leftValue <= rightValue) {
             if (testFunction(batteries, sum, carNr, midValue)) {
                 result = midValue;
                 leftValue = midValue + 1;
