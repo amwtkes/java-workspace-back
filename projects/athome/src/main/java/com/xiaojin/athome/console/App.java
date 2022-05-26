@@ -23,10 +23,12 @@ public class App {
 //            }
 //        }
 
-        List<List<Integer>> generate = new Combinations().cnkGenerate(5-1, 5);
-        for(List<Integer> c : generate){
+//        List<List<Integer>> generate = Combinations.cnkGenerate(5 - 1, 5);
+        List<List<Integer>> generate = Combinations.genAllSubSequnceIndex(6);
+        for (List<Integer> c : generate) {
             System.out.println(c);
         }
+        System.out.println(generate.size());
     }
 
     public static int breakDown(int l, int r, int[] arry, int[] sum, int index) {

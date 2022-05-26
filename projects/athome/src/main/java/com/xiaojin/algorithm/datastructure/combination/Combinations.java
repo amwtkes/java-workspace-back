@@ -26,6 +26,36 @@ public class Combinations {
         return combination;
     }
 
+    /**
+     * 生成所有的子串索引
+     *
+     * @param n 数组长度
+     * @return 子串索引号的二维数组
+     */
+    public static List<List<Integer>> genAllSubSequnceIndex(int n) {
+        List<List<Integer>> ret = new ArrayList<>();
+        for (int i = 1; i <= n; i++) {
+            ret.addAll(genSeqBySpan(i, n));
+        }
+        return ret;
+    }
+
+    private static List<List<Integer>> genSeqBySpan(int span, int n) {
+        List<List<Integer>> ret = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            List<Integer> tmp = new ArrayList<>();
+            for (int j = 0; j < span; j++) {
+                int index = j + i;
+                if (index == n) {
+                    return ret;
+                }
+                tmp.add(index);
+            }
+            ret.add(tmp);
+        }
+        return ret;
+    }
+
     private static void gen(int k, int begin, int end, Stack<Integer> chosen, List<List<Integer>> combination) {
         if (k > 1) {
             for (int i = begin; i < end; i++) {
