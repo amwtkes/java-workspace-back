@@ -28,7 +28,7 @@ public class PresentNaiveProcessor implements PresentProcessor {
         int maxValue = 0;
         List<Integer> ret = new ArrayList<>();
 
-        List<List<Integer>> generate = new CnkCombination().generate(sortedItems.size() - 1, k);
+        List<List<Integer>> generate = CnkCombination.generate(sortedItems.size() - 1, k);
         for (List<Integer> indexCombinationList : generate) {
             int minTemp = Integer.MAX_VALUE;
 

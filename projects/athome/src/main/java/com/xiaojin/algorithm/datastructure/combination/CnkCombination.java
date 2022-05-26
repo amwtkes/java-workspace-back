@@ -16,7 +16,7 @@ public class CnkCombination {
      * @param k 多少个
      * @return index数组
      */
-    public List<List<Integer>> generate(int n, int k) {
+    public static List<List<Integer>> generate(int n, int k) {
         if (n + 1 < k) {
             throw new IllegalArgumentException("n<k! k:" + k + " n:" + n);
         }
@@ -26,7 +26,7 @@ public class CnkCombination {
         return combination;
     }
 
-    private void gen(int k, int begin, int end, Stack<Integer> chosen, List<List<Integer>> combination) {
+    private static void gen(int k, int begin, int end, Stack<Integer> chosen, List<List<Integer>> combination) {
         if (k > 1) {
             for (int i = begin; i < end; i++) {
                 chosen.push(i);
