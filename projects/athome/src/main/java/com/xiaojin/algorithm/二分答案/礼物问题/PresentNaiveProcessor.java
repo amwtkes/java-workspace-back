@@ -1,6 +1,6 @@
 package com.xiaojin.algorithm.二分答案.礼物问题;
 
-import com.xiaojin.algorithm.datastructure.combination.CnkCombination;
+import com.xiaojin.algorithm.datastructure.combination.Combinations;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -28,7 +28,7 @@ public class PresentNaiveProcessor implements PresentProcessor {
         int maxValue = 0;
         List<Integer> ret = new ArrayList<>();
 
-        List<List<Integer>> generate = CnkCombination.generate(sortedItems.size() - 1, k);
+        List<List<Integer>> generate = Combinations.cnkGenerate(sortedItems.size() - 1, k);
         for (List<Integer> indexCombinationList : generate) {
             int minTemp = Integer.MAX_VALUE;
 

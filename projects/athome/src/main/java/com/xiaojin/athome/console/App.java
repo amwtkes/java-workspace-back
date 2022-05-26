@@ -1,9 +1,7 @@
 package com.xiaojin.athome.console;
 
-import com.xiaojin.algorithm.datastructure.combination.CnkCombination;
+import com.xiaojin.algorithm.datastructure.combination.Combinations;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class App {
@@ -25,7 +23,7 @@ public class App {
 //            }
 //        }
 
-        List<List<Integer>> generate = new CnkCombination().generate(5-1, 5);
+        List<List<Integer>> generate = new Combinations().cnkGenerate(5-1, 5);
         for(List<Integer> c : generate){
             System.out.println(c);
         }

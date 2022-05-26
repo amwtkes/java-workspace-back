@@ -8,7 +8,7 @@ import java.util.Stack;
  * 计算Cnk的所有组合
  * 返回所有组合的数组
  */
-public class CnkCombination {
+public class Combinations {
     /**
      * 返回的是index组合
      *
@@ -16,7 +16,7 @@ public class CnkCombination {
      * @param k 多少个
      * @return index数组
      */
-    public static List<List<Integer>> generate(int n, int k) {
+    public static List<List<Integer>> cnkGenerate(int n, int k) {
         if (n + 1 < k) {
             throw new IllegalArgumentException("n<k! k:" + k + " n:" + n);
         }
