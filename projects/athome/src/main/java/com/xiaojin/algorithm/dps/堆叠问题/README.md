@@ -2,4 +2,6 @@
 如：7个动物，重量为：1，3，5，7，9，11，21
 则最大叠5层：1，3，5，9，21.
 
-[笔记](https://app.yinxiang.com/shard/s65/nl/15273355/cc8d4888-76e9-41e5-a0bc-ce8dc68deffc/)
+- [笔记](https://app.yinxiang.com/shard/s65/nl/15273355/cc8d4888-76e9-41e5-a0bc-ce8dc68deffc/)
+- 最长递增子序列问题的dp解答。
+- [左的视频](https://www.mashibing.com/study?courseNo=465&sectionNo=57231&systemId=21)
