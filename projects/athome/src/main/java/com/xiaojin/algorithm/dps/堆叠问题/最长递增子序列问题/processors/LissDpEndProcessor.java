@@ -31,8 +31,13 @@ public class LissDpEndProcessor implements LISSProcessor {
         /**
          * 算法见README
          * end[i]代表一个函数，i表示长度为i+1 -> end(i) -> 值是满足i+1长度的子序列中，子序列的最后一个元素的最小值。
+         * 长度到最小末端元素的关系。
          * end[i]肯定是一个递增的数组
-         * end函数的参数i跟array[i]没有关系。
+         * end函数的参数i跟array[i]的i没有关系。
+         * 为什么end函数有效？
+         * 1. 顺序性，最长子序列的长度,本身是有顺序的，从左到右，依次遍历。NORMAL_MISS的更新，跟这个顺序性息息相关。没有顺序性，这个end函数就不成立。
+         * 2. 扩展性跟一个子序列最后一个元素的大小十分相关，特殊元素的作用。扩展的过程是个代数比较的过程，跟最小值有关。
+         * 3。 所以可以做一个end函数来描述这个关系。
          */
         ArrayList<Integer> end = new ArrayList<>(items.size());
         for (int i = 0; i < items.size(); i++) {

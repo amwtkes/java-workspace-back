@@ -5,3 +5,4 @@
 - [笔记](https://app.yinxiang.com/shard/s65/nl/15273355/cc8d4888-76e9-41e5-a0bc-ce8dc68deffc/)
 - 最长递增子序列问题的dp解答。
 - [左的视频](https://www.mashibing.com/study?courseNo=465&sectionNo=57231&systemId=21)
+- end函数的使用,[参考](com/xiaojin/algorithm/dps/堆叠问题/最长递增子序列问题/README.md)
