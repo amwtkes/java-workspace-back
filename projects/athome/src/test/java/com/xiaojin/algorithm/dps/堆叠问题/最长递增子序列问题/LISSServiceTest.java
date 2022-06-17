@@ -45,7 +45,10 @@ class LISSServiceTest {
         dpRun = lissService.run(integers, DP);
         assertEquals(5, naiveRun);
         assertEquals(naiveRun, dpRun);
+    }
 
+    @Test
+    void batchRun() {
         for (int i = 0; i < 10; i++) {
             List<Integer> items = ContextHelper.toList(ContextHelper.randomArray(20, 1000, false));
             int naive = lissService.run(items, NAIVE);
