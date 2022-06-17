@@ -10,9 +10,9 @@ import java.util.Stack;
  */
 public class Combinations {
     /**
-     * 返回的是index组合
+     * 返回的是长度为k的子序列索引
      *
-     * @param n 最大元素的index
+     * @param n !最大元素的index
      * @param k 多少个
      * @return index数组
      */
