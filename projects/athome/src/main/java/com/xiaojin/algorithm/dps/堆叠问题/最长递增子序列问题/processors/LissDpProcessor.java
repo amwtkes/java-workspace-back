@@ -22,7 +22,9 @@ public class LissDpProcessor implements LISSProcessor {
             System.out.println("不使用pure dp");
             return;
         }
+        System.out.println("使用dp算法来解!");
         List<Integer> items = lissContext.getItems();
+//        System.out.println(items);
         /**
          * dp[i] - 以i为结尾的最长子序列的长度
          */

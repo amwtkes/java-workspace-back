@@ -167,18 +167,18 @@ public class ContextHelper {
      * @param value 要搜索的值
      * @return 返回索引值,-1表示没有找到.
      */
-    public static BinarySearchResult binarySearch(int[] array, int value) throws ProcessorException {
-        if (array == null || array.length == 0) {
+    public static BinarySearchResult binarySearch(ArrayList<Integer> array, int value) throws ProcessorException {
+        if (array == null || array.size() == 0) {
             throw new ProcessorException("array is empty!");
         }
         int begin = 0;
-        int end = array.length - 1;
+        int end = array.size() - 1;
         while (begin <= end) {
             int mid = begin + (end - begin) / 2;
-            if (array[mid] == value) {
+            if (array.get(mid) == value) {
                 return new BinarySearchResult(array, mid, end, begin, value);
             }
-            if (array[mid] > value) {
+            if (array.get(mid) > value) {
                 end = mid - 1;
             } else {
                 begin = mid + 1;
@@ -197,7 +197,7 @@ public class ContextHelper {
     @Getter
     @AllArgsConstructor
     public static class BinarySearchResult {
-        private int[] items;
+        private ArrayList<Integer> items;
         private int resultIndex;
         private int end;
         private int begin;
@@ -207,7 +207,7 @@ public class ContextHelper {
             if (resultIndex != -1) {
                 return BinarySearchResultType.OK;
             }
-            if (begin == items.length) {
+            if (begin == items.size()) {
                 return BinarySearchResultType.NO_BIGGER;
             }
             if (end == -1) {
@@ -227,7 +227,7 @@ public class ContextHelper {
                 case OK:
                     int preResultIndex = resultIndex - 1;
                     while (preResultIndex >= 0) {
-                        if (items[preResultIndex] < searchValue) {
+                        if (items.get(preResultIndex) < searchValue) {
                             return preResultIndex;
                         }
                         preResultIndex--;

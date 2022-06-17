@@ -1,6 +1,7 @@
 package com.xiaojin.algorithm.dps.堆叠问题.最长递增子序列问题;
 
 import com.xiaojin.algorithm.base.ContextHelper;
+import com.xiaojin.algorithm.dps.堆叠问题.最长递增子序列问题.processors.LissDpEndProcessor;
 import com.xiaojin.algorithm.dps.堆叠问题.最长递增子序列问题.processors.LissDpProcessor;
 import com.xiaojin.algorithm.dps.堆叠问题.最长递增子序列问题.processors.LissNaiveProcessor;
 import org.assertj.core.util.Lists;
@@ -12,12 +13,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
-import static com.xiaojin.algorithm.dps.堆叠问题.最长递增子序列问题.LISSPriority.DP;
-import static com.xiaojin.algorithm.dps.堆叠问题.最长递增子序列问题.LISSPriority.NAIVE;
+import static com.xiaojin.algorithm.dps.堆叠问题.最长递增子序列问题.LISSPriority.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {LISSService.class, LissNaiveProcessor.class, LissDpProcessor.class})
+@SpringBootTest(classes = {LISSService.class, LissNaiveProcessor.class, LissDpProcessor.class, LissDpEndProcessor.class})
 class LISSServiceTest {
     @Autowired
     private LISSService lissService;
@@ -54,6 +54,16 @@ class LISSServiceTest {
             int naive = lissService.run(items, NAIVE);
             int dp = lissService.run(items, DP);
             assertEquals(naive, dp);
+        }
+    }
+
+    @Test
+    void batchRun2() {
+        for (int i = 0; i < 100; i++) {
+            List<Integer> items = ContextHelper.toList(ContextHelper.randomArray(2000, 1000, false));
+            int end_dp = lissService.run(items, END_DP);
+            int dp = lissService.run(items, DP);
+            assertEquals(end_dp, dp);
         }
     }
 }
