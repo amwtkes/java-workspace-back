@@ -1,5 +1,7 @@
 package com.xiaojin.algorithm.base;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -158,7 +160,89 @@ public class ContextHelper {
         return i - delta;
     }
 
+    /**
+     * 二分搜索
+     *
+     * @param array 目标数组，必须是从小到大排列的
+     * @param value 要搜索的值
+     * @return 返回索引值,-1表示没有找到.
+     */
+    public static BinarySearchResult binarySearch(int[] array, int value) throws ProcessorException {
+        if (array == null || array.length == 0) {
+            throw new ProcessorException("array is empty!");
+        }
+        int begin = 0;
+        int end = array.length - 1;
+        while (begin <= end) {
+            int mid = begin + (end - begin) / 2;
+            if (array[mid] == value) {
+                return new BinarySearchResult(array, mid, end, begin, value);
+            }
+            if (array[mid] > value) {
+                end = mid - 1;
+            } else {
+                begin = mid + 1;
+            }
+        }
+        return new BinarySearchResult(array, -1, end, begin, value);
+    }
+
+    public enum BinarySearchResultType {
+        NO_BIGGER,
+        NO_LESSER,
+        NORMAL_MISS,
+        OK
+    }
+
+    @Getter
+    @AllArgsConstructor
+    public static class BinarySearchResult {
+        private int[] items;
+        private int resultIndex;
+        private int end;
+        private int begin;
+        private int searchValue;
+
+        public BinarySearchResultType getResultType() {
+            if (resultIndex != -1) {
+                return BinarySearchResultType.OK;
+            }
+            if (begin == items.length) {
+                return BinarySearchResultType.NO_BIGGER;
+            }
+            if (end == -1) {
+                return BinarySearchResultType.NO_LESSER;
+            }
+            return BinarySearchResultType.NORMAL_MISS;
+        }
+
+        /**
+         * 获取小于目标值得最大元素索引号。如果有相等的，则返回相等元素的索引值。
+         *
+         * @return -1表示没有比目标值更小的元素。
+         */
+        public int getLastLessOneIndex() {
+            BinarySearchResultType resultType = getResultType();
+            switch (resultType) {
+                case OK:
+                    int preResultIndex = resultIndex - 1;
+                    while (preResultIndex >= 0) {
+                        if (items[preResultIndex] < searchValue) {
+                            return preResultIndex;
+                        }
+                        preResultIndex--;
+                    }
+                    return -1;
+                case NORMAL_MISS:
+                    return end;
+                default:
+                    return -1;
+            }
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println(intArrayToString(randomArray(10, 50, true)));
     }
+
 }
