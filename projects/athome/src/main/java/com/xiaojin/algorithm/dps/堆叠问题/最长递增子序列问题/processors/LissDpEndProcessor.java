@@ -30,8 +30,9 @@ public class LissDpEndProcessor implements LISSProcessor {
 //        System.out.println(items);
         /**
          * 算法见README
+         * end[i]代表一个函数，i表示长度为i+1 -> end(i) -> 值是满足i+1长度的子序列中，子序列的最后一个元素的最小值。
          * end[i]肯定是一个递增的数组
-         *
+         * end函数的参数i跟array[i]没有关系。
          */
         ArrayList<Integer> end = new ArrayList<>(items.size());
         for (int i = 0; i < items.size(); i++) {

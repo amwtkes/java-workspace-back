@@ -40,11 +40,16 @@ class LISSServiceTest {
         int dpRun = lissService.run(integers, DP);
         assertEquals(naiveRun, dpRun);
 
+        int endRun = lissService.run(integers, END_DP);
+        assertEquals(naiveRun, endRun);
+
         integers = Lists.list(4, 1, 3, 2, 3, 9, 5, 6);
         naiveRun = lissService.run(integers, NAIVE);
         dpRun = lissService.run(integers, DP);
+        endRun = lissService.run(integers, END_DP);
         assertEquals(5, naiveRun);
         assertEquals(naiveRun, dpRun);
+        assertEquals(naiveRun, endRun);
     }
 
     @Test
