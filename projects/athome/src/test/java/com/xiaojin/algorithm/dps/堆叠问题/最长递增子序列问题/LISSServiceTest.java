@@ -1,5 +1,6 @@
 package com.xiaojin.algorithm.dps.堆叠问题.最长递增子序列问题;
 
+import com.xiaojin.algorithm.base.ContextHelper;
 import com.xiaojin.algorithm.dps.堆叠问题.最长递增子序列问题.processors.LissDpProcessor;
 import com.xiaojin.algorithm.dps.堆叠问题.最长递增子序列问题.processors.LissNaiveProcessor;
 import org.assertj.core.util.Lists;
@@ -44,5 +45,12 @@ class LISSServiceTest {
         dpRun = lissService.run(integers, DP);
         assertEquals(5, naiveRun);
         assertEquals(naiveRun, dpRun);
+
+        for (int i = 0; i < 10; i++) {
+            List<Integer> items = ContextHelper.toList(ContextHelper.randomArray(20, 1000, false));
+            int naive = lissService.run(items, NAIVE);
+            int dp = lissService.run(items, DP);
+            assertEquals(naive, dp);
+        }
     }
 }
