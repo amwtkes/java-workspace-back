@@ -64,7 +64,7 @@ class LISSServiceTest {
 
     @Test
     void batchRun2() {
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 1000; i++) {
             List<Integer> items = ContextHelper.toList(ContextHelper.randomArray(2000, 1000, false));
             int end_dp = lissService.run(items, END_DP);
             int dp = lissService.run(items, DP);

@@ -17,6 +17,12 @@ import static com.xiaojin.algorithm.dps.堆叠问题.堆叠.PipeUpPriority.NAIVE
 @Component
 @SortOrder(NAIVE)
 public class PipeUpNaiveProcessor implements PipeUpProcessor {
+    /**
+     * 这里求的是items是乱序情况下的，最大堆叠层数。
+     * 跟最大自增子序列有很大的相似处，因为最大堆叠的子序列必然是递增子序列，
+     * 而这里不过是加上了一个堆叠的限制。即：
+     * 见面的i个元素的和必须小于第i+1个元素，否则即便a[i+1]>a[i]也不能形成子序列解。
+     * */
     @Override
     public void process(PipeUpContext pipeUpContext) throws ProcessorException {
         if (pipeUpContext.getSwitcher() != NAIVE) {
