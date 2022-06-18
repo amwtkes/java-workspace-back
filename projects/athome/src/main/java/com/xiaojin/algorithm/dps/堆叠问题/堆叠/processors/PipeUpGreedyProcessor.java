@@ -15,6 +15,12 @@ import static com.xiaojin.algorithm.dps.堆叠问题.堆叠.PipeUpPriority.GREED
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Component
 @SortOrder(GREEDY)
+
+/**
+ * 本质是Naive与EndWay的一个特例。
+ * 由end方法退化而来，如果原始的items是递增排序好的，则end数组当二分搜索的时候不会出现要更新end数组中的值得情况，
+ * 所以正好变成了贪心的形式
+ * */
 public class PipeUpGreedyProcessor implements PipeUpProcessor {
     @Override
     public void process(PipeUpContext pipeUpContext) throws ProcessorException {

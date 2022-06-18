@@ -47,6 +47,15 @@ class PipeUpServiceTest {
     }
 
     @Test
+    void testBasicCase() {
+        ArrayList<Integer> integers = Lists.newArrayList(1, 3, 5, 7, 9, 11, 21);
+        int run = pipeUpService.run(integers, END);
+        int naiveRun = pipeUpService.run(integers, NAIVE);
+        Assertions.assertEquals(run, naiveRun);
+        Assertions.assertEquals(run, 5);
+    }
+
+    @Test
     void testEndBatch() {
         for (int i = 0; i < 1000; i++) {
             ArrayList<Integer> integers = ContextHelper.toList(ContextHelper.randomArray(15, 1000, false));
