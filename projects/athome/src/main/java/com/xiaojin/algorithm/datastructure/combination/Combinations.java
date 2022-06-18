@@ -18,7 +18,7 @@ public class Combinations {
      */
     public static List<List<Integer>> cnkGenerate(int n, int k) {
         if (n + 1 < k) {
-            throw new IllegalArgumentException("n<k! k:" + k + " n:" + n);
+            throw new IllegalArgumentException("n+1<k! k:" + k + " n:" + n);
         }
         Stack<Integer> chosen = new Stack<>();
         List<List<Integer>> combination = new ArrayList<>();
