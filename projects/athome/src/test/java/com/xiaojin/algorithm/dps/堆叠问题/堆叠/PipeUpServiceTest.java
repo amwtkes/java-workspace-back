@@ -31,7 +31,7 @@ class PipeUpServiceTest {
     }
 
     @Test
-    void testEnd() {
+    void testIfEqualLogic() {
         ArrayList<Integer> integers = Lists.newArrayList(560, 410, 974, 739, 858, 744, 399, 418, 358, 330, 379, 709, 646, 490, 9);
         int run = pipeUpService.run(integers, END);
         int naiveRun = pipeUpService.run(integers, NAIVE);
@@ -39,7 +39,7 @@ class PipeUpServiceTest {
     }
 
     @Test
-    void testEnd2() {
+    void testOKSwitchLogic() {
         ArrayList<Integer> integers = Lists.newArrayList(168, 410, 192, 538, 775, 388, 168, 586, 129, 380, 439, 281, 737, 912, 948);
         int run = pipeUpService.run(integers, END);
         int naiveRun = pipeUpService.run(integers, NAIVE);
