@@ -24,3 +24,8 @@ hs_err_pid*
 .idea/
 .mvn/
 .DS_Store
+/spi/rate-api/rate-api.iml
+/spi/rate-app/rate-app.iml
+/spi/rate-impl/rate-impl.iml
+/spi/spi.iml
+/spring-study/spring-study.iml
